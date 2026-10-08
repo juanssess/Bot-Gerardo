@@ -1,0 +1,26 @@
+GERARDO BOT — CÓMO SE USA
+=========================
+
+Todo se maneja desde la app "Gerardo Bot" (carpeta Bot Gerardo, doble clic desde Finder).
+
+La ventana muestra si el bot está prendido y los ajustes actuales, con 3 botones:
+  · Arrancar bot / Detener bot
+  · Ajustes   → elegís qué cambiar de una lista:
+        Estrategia   (Original = cruce alcista compra · Invertida = cruce alcista vende)
+        EMA rápida   (número entero, menor que la lenta)
+        EMA lenta    (número entero, mayor que la rápida)
+        Take profit  (en puntos: 1 punto = 4 ticks en /ES · 3.5 = 14 ticks)
+        Stop loss    (en puntos · 0 = sin stop loss)
+  · Salir
+
+Cada estrategia guarda SUS PROPIOS ajustes: si cambiás el TP estando en la invertida,
+la original no se toca, y al volver a la invertida recupera el TP que le pusiste.
+
+Si cambiás algo con el bot prendido, se aplica cuando lo reinicies
+(Detener bot → Arrancar bot).
+
+Por dentro: Estrategias/ajustes.py escribe en .env solo estos valores
+(INVERTIR_ESTRATEGIA, EMA_RAPIDA, EMA_LENTA, TAKE_PROFIT_PUNTOS, STOP_LOSS_PUNTOS y
+los límites diarios). Las claves de Schwab y Telegram no se tocan.
+Los valores de cada estrategia están en Estrategias/original y Estrategias/invertida.
+La app anota todo lo que hace en ~/Library/Logs/CambiarEstrategia.log.

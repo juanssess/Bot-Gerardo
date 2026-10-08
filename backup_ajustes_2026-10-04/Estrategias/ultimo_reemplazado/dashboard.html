@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerardo_Bot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+  :root {
+    --bg0:#080b12; --bg1:#0d1120; --bg2:#111827; --bg3:#1a2035;
+    --border:rgba(255,255,255,.07); --border2:rgba(255,255,255,.12);
+    --text:#e2e8f0; --muted:#5a6578; --muted2:#8a96a8;
+    --green:#00d084; --green2:rgba(0,208,132,.12);
+    --red:#ff4757;   --red2:rgba(255,71,87,.12);
+    --blue:#4a90d9;  --blue2:rgba(74,144,217,.15);
+    --amber:#ffa502; --amber2:rgba(255,165,2,.12);
+    --ema7:#4a90d9;  --ema10:#ffa502;
+    --mono:'JetBrains Mono',ui-monospace,monospace; --sans:'Inter',system-ui,sans-serif;
+  }
+  html, body { background:var(--bg0); color:var(--text); font-family:var(--sans); font-size:14px; }
+  body { min-height:100vh; }
+  .num { font-family:var(--mono); font-variant-numeric:tabular-nums; }
+  .green { color:var(--green); } .red { color:var(--red); } .amber { color:var(--amber); } .muted { color:var(--muted2); }
+
+  /* ── Topbar ── */
+  .topbar { position:sticky; top:0; z-index:5; background:var(--bg1); border-bottom:1px solid var(--border);
+            display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px 16px; padding:10px 20px; }
+  .tb-group { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .logo { font-family:var(--mono); font-size:13px; font-weight:600; color:var(--green); letter-spacing:.04em; }
+  .pill { font-family:var(--mono); font-size:11px; font-weight:500; padding:3px 10px; border-radius:99px; border:1px solid; white-space:nowrap; }
+  .pill.blue  { background:var(--blue2);  color:var(--blue);  border-color:rgba(74,144,217,.3); }
+  .pill.amber { background:var(--amber2); color:var(--amber); border-color:rgba(255,165,2,.3); }
+  .pill.green { background:var(--green2); color:var(--green); border-color:rgba(0,208,132,.3); }
+  .pill.red   { background:var(--red2);   color:var(--red);   border-color:rgba(255,71,87,.3); }
+  .pill.gray  { background:var(--bg3);    color:var(--muted2); border-color:var(--border2); }
+  .conn { display:flex; align-items:center; gap:7px; font-family:var(--mono); font-size:12px; }
+  .dot { width:7px; height:7px; border-radius:50%; background:var(--muted); flex:none; }
+  .dot.live { background:var(--green); animation:pulse 2s infinite; }
+  .dot.slow { background:var(--amber); } .dot.off { background:var(--red); }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+  .clock { font-family:var(--mono); font-size:12px; color:var(--muted2); }
+
+  /* ── Layout ── */
+  .page { padding:16px 20px 28px; display:flex; flex-direction:column; gap:14px; max-width:1600px; margin:0 auto; }
+  .banner { display:none; border-radius:8px; padding:10px 14px; font-size:12px; font-family:var(--mono); text-align:center; border:1px solid; }
+  .banner.visible { display:block; }
+  .banner.red   { background:var(--red2);   border-color:rgba(255,71,87,.3);  color:var(--red); }
+  .banner.amber { background:var(--amber2); border-color:rgba(255,165,2,.3);  color:var(--amber); }
+
+  .kpis { display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:12px; }
+  .kpi { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:14px 16px; min-width:0; }
+  .kpi-label { font-size:10px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px; }
+  .kpi-val { font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:24px; font-weight:600; line-height:1.1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .kpi-sub { font-family:var(--mono); font-size:11px; color:var(--muted2); margin-top:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .progress { height:4px; background:var(--bg3); border-radius:2px; margin-top:10px; overflow:hidden; }
+  .progress > div { height:100%; border-radius:2px; background:var(--blue); transition:width .5s linear, background .3s; }
+
+  .grid-main { display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:14px; align-items:start; }
+  .grid-bottom { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:14px; align-items:start; }
+  .side { display:flex; flex-direction:column; gap:14px; }
+
+  .card { background:var(--bg1); border:1px solid var(--border); border-radius:10px; overflow:hidden; min-width:0; }
+  .card-header { padding:11px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .card-title { font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--muted2); }
+  .card-meta { font-size:11px; color:var(--muted); font-family:var(--mono); }
+  .card-body { padding:14px 16px; }
+
+  /* ── Chart ── */
+  .legend { display:flex; gap:14px; flex-wrap:wrap; font-family:var(--mono); font-size:11px; color:var(--muted2); }
+  .legend span { display:inline-flex; align-items:center; gap:6px; }
+  .legend i { width:12px; height:2px; display:inline-block; border-radius:1px; }
+  #chart { height:430px; position:relative; }
+  .chart-empty { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:var(--muted); font-family:var(--mono); font-size:12px; pointer-events:none; }
+
+  /* ── Filas clave/valor ── */
+  .row { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:7px 0; font-size:12px; }
+  .row + .row { border-top:1px solid var(--border); }
+  .row .k { color:var(--muted2); display:flex; align-items:center; gap:7px; }
+  .row .v { font-family:var(--mono); font-variant-numeric:tabular-nums; text-align:right; }
+  .swatch { width:8px; height:8px; border-radius:2px; display:inline-block; }
+  .bar-label { display:flex; justify-content:space-between; font-size:12px; margin-top:4px; }
+  .bar-label + .progress { margin-top:6px; margin-bottom:12px; }
+
+  /* ── Tablas ── */
+  .table-wrap { overflow:auto; max-height:320px; }
+  table { width:100%; border-collapse:collapse; font-family:var(--mono); font-size:12px; font-variant-numeric:tabular-nums; }
+  th { position:sticky; top:0; background:var(--bg1); text-align:left; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); padding:10px 12px; font-weight:600; white-space:nowrap; }
+  td { padding:8px 12px; border-top:1px solid var(--border); vertical-align:middle; white-space:nowrap; }
+  td.wrap { white-space:normal; color:var(--muted2); }
+  td.r, th.r { text-align:right; }
+  tr:hover td { background:rgba(255,255,255,.02); }
+  .tag { font-size:10px; padding:2px 7px; border-radius:4px; font-weight:600; letter-spacing:.04em; border:1px solid; }
+  .tag-COMPRA, .tag-LONG  { background:var(--green2); color:var(--green); border-color:rgba(0,208,132,.25); }
+  .tag-VENTA,  .tag-SHORT { background:var(--red2);   color:var(--red);   border-color:rgba(255,71,87,.25); }
+  .tag-INFO { background:var(--blue2);  color:var(--blue);  border-color:rgba(74,144,217,.25); }
+  .tag-WARN { background:var(--amber2); color:var(--amber); border-color:rgba(255,165,2,.25); }
+  .empty { padding:22px; text-align:center; color:var(--muted); font-family:var(--mono); font-size:12px; }
+  .summary { display:flex; gap:16px; flex-wrap:wrap; font-family:var(--mono); font-size:11px; color:var(--muted2); }
+
+  ::-webkit-scrollbar { width:6px; height:6px; }
+  ::-webkit-scrollbar-thumb { background:var(--bg3); border-radius:3px; }
+
+  @media (max-width:1100px) {
+    .kpis { grid-template-columns:repeat(2, minmax(0,1fr)); }
+    .kpis .kpi:first-child { grid-column:1 / -1; }
+  }
+  @media (max-width:1000px) {
+    .grid-main, .grid-bottom { grid-template-columns:minmax(0,1fr); }
+    .side { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); }
+  }
+  @media (max-width:640px) {
+    .topbar { padding:10px 16px; }
+    .page { padding:12px 16px 24px; }
+    .kpi-val { font-size:19px; }
+    .kpi-sub { white-space:normal; }
+    #chart { height:320px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="tb-group">
+    <span class="logo">Gerardo_Bot</span>
+    <span class="pill blue" id="symbol-pill">—</span>
+    <span class="pill gray" id="estado-pill">Conectando…</span>
+  </div>
+  <div class="tb-group">
+    <span class="pill amber" id="mode-pill">PAPER</span>
+    <span class="conn"><span class="dot" id="conn-dot"></span><span id="conn-text" class="muted">Conectando…</span></span>
+    <span class="clock" id="clock">--:--:--</span>
+  </div>
+</header>
+
+<main class="page">
+
+  <div class="banner red" id="offline-banner"></div>
+  <div class="banner amber" id="token-banner"></div>
+
+  <!-- ── KPIs ── -->
+  <section class="kpis">
+    <div class="kpi">
+      <div class="kpi-label">Precio</div>
+      <div class="kpi-val" id="k-precio">—</div>
+      <div class="kpi-sub" id="k-precio-sub">esperando al bot…</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">P&amp;L desde que se prendió (neto)</div>
+      <div class="kpi-val" id="k-pnl">—</div>
+      <div class="kpi-sub" id="k-pnl-sub">—</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Posición</div>
+      <div class="kpi-val" id="k-pos">—</div>
+      <div class="kpi-sub" id="k-pos-sub">—</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Señal</div>
+      <div class="kpi-val" id="k-senal">—</div>
+      <div class="kpi-sub" id="k-senal-sub">—</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Cierre de vela</div>
+      <div class="kpi-val" id="k-vela">—</div>
+      <div class="progress"><div id="k-vela-bar" style="width:0%"></div></div>
+    </div>
+  </section>
+
+  <!-- ── Gráfico + lateral ── -->
+  <section class="grid-main">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title" id="chart-title">Velas</span>
+        <div class="legend">
+          <span><i style="background:var(--ema7)"></i>EMA 7 <b class="num" id="lg-ema7">—</b></span>
+          <span><i style="background:var(--ema10)"></i>EMA 10 <b class="num" id="lg-ema10">—</b></span>
+          <span><i style="background:var(--text);height:1px;border-top:1px dashed var(--text)"></i>Entrada</span>
+          <span><i style="background:var(--green)"></i>TP</span>
+          <span><i style="background:var(--red)"></i>SL</span>
+        </div>
+      </div>
+      <div id="chart"><div class="chart-empty" id="chart-empty">Esperando velas…</div></div>
+    </div>
+
+    <aside class="side">
+      <div class="card">
+        <div class="card-header"><span class="card-title">Estrategia EMA 7/10</span></div>
+        <div class="card-body">
+          <div class="row"><span class="k"><span class="swatch" style="background:var(--ema7)"></span>EMA 7</span><span class="v" id="s-ema7">—</span></div>
+          <div class="row"><span class="k"><span class="swatch" style="background:var(--ema10)"></span>EMA 10</span><span class="v" id="s-ema10">—</span></div>
+          <div class="row"><span class="k">EMA 7 − EMA 10</span><span class="v" id="s-diff">—</span></div>
+          <div class="row"><span class="k">ADX</span><span class="v" id="s-adx">—</span></div>
+          <div class="row"><span class="k">Take profit / Stop loss</span><span class="v" id="s-tpsl">—</span></div>
+          <div class="row"><span class="k">Valor por punto</span><span class="v" id="s-vpp">—</span></div>
+          <div class="row"><span class="k">Horario</span><span class="v" id="s-horario">—</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><span class="card-title">Riesgo del día</span></div>
+        <div class="card-body">
+          <div class="bar-label"><span class="muted">Pérdida acumulada</span><span class="num" id="r-perd">—</span></div>
+          <div class="progress"><div id="r-perd-bar" style="width:0%"></div></div>
+          <div class="bar-label"><span class="muted">Operaciones</span><span class="num" id="r-ops">—</span></div>
+          <div class="progress" style="margin-bottom:0"><div id="r-ops-bar" style="width:0%"></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><span class="card-title">Sistema</span></div>
+        <div class="card-body">
+          <div class="row"><span class="k">Token Schwab</span><span class="v" id="y-token">—</span></div>
+          <div class="row"><span class="k">Telegram</span><span class="v" id="y-tg">—</span></div>
+          <div class="row"><span class="k">Velas procesadas</span><span class="v" id="y-velas">—</span></div>
+          <div class="row"><span class="k">Última actualización</span><span class="v" id="y-upd">—</span></div>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- ── Operaciones + log ── -->
+  <section class="grid-bottom">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Operaciones del día</span>
+        <div class="summary" id="ops-summary"></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>Hora</th><th>Lado</th><th class="r">Entrada</th><th class="r">Salida</th><th class="r">Pts</th><th class="r">Comis.</th><th class="r">P&amp;L neto</th><th>Motivo</th>
+          </tr></thead>
+          <tbody id="ops-body"></tbody>
+        </table>
+        <div class="empty" id="ops-empty">Sin operaciones cerradas hoy</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Log de actividad</span>
+        <span class="card-meta" id="log-count">0 eventos</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Hora</th><th>Tipo</th><th class="r">Precio</th><th>Mensaje</th></tr></thead>
+          <tbody id="log-body"></tbody>
+        </table>
+        <div class="empty" id="log-empty">Sin eventos</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
+<script>
+// ══════════════════════════════════════════════
+//  HELPERS
+// ══════════════════════════════════════════════
+const $ = id => document.getElementById(id);
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const fmt = (n, d = 2) => n == null || isNaN(n) ? '—'
+  : Number(n).toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+const signed = (n, d = 2) => n == null ? '—' : (n > 0 ? '+' : n < 0 ? '−' : '') + fmt(Math.abs(n), d);
+const money = n => n == null ? '—' : (n > 0 ? '+' : n < 0 ? '−' : '') + '$' + fmt(Math.abs(n), 2);
+const colorOf = n => n > 0 ? 'green' : n < 0 ? 'red' : '';
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+function setText(id, txt, cls) {
+  const el = $(id); el.textContent = txt;
+  if (cls !== undefined) el.className = el.className.split(' ').filter(c => !['green','red','amber','muted'].includes(c)).concat(cls ? [cls] : []).join(' ');
+}
+function duracion(seg) {
+  seg = Math.max(0, Math.round(seg));
+  const d = Math.floor(seg / 86400), h = Math.floor(seg % 86400 / 3600), m = Math.floor(seg % 3600 / 60);
+  if (d) return `${d} d ${h} h`;
+  if (h) return `${h} h ${m} min`;
+  if (m) return `${m} min`;
+  return `${seg} s`;
+}
+// lightweight-charts muestra UTC: corremos las horas a la zona local
+const TZ = -new Date().getTimezoneOffset() * 60;
+const local = t => t + TZ;
+
+// ══════════════════════════════════════════════
+//  GRÁFICO DE VELAS
+// ══════════════════════════════════════════════
+const LC = window.LightweightCharts;
+let chart, velasSerie, ema7Serie, ema10Serie, lineasPrecio = [], niveles = [], firmaVelas = '', ultimaT = 0;
+
+if (LC) {
+  chart = LC.createChart($('chart'), {
+    autoSize: true,
+    layout: { background: { color: 'transparent' }, textColor: css('--muted2'), fontFamily: 'JetBrains Mono', fontSize: 11 },
+    grid: { vertLines: { color: 'rgba(255,255,255,.04)' }, horzLines: { color: 'rgba(255,255,255,.04)' } },
+    rightPriceScale: { borderColor: 'rgba(255,255,255,.08)' },
+    timeScale: { borderColor: 'rgba(255,255,255,.08)', timeVisible: true, secondsVisible: false, rightOffset: 4 },
+    crosshair: { mode: LC.CrosshairMode.Normal },
+    localization: { priceFormatter: p => fmt(p, 2) },
+  });
+  velasSerie = chart.addCandlestickSeries({
+    upColor: css('--green'), downColor: css('--red'), borderVisible: false,
+    wickUpColor: css('--green'), wickDownColor: css('--red'),
+    // La escala incluye siempre entrada / TP / SL aunque estén lejos del precio
+    autoscaleInfoProvider: original => {
+      const r = original();
+      if (!r || !niveles.length) return r;
+      r.priceRange.minValue = Math.min(r.priceRange.minValue, ...niveles);
+      r.priceRange.maxValue = Math.max(r.priceRange.maxValue, ...niveles);
+      return r;
+    },
+  });
+  const lineOpts = { lineWidth: 2, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false };
+  ema7Serie  = chart.addLineSeries({ ...lineOpts, color: css('--ema7') });
+  ema10Serie = chart.addLineSeries({ ...lineOpts, color: css('--ema10'), lineStyle: LC.LineStyle.Dashed });
+} else {
+  $('chart-empty').textContent = 'No se pudo cargar la librería del gráfico (¿sin internet?)';
+}
+
+function actualizarGrafico(d) {
+  if (!chart) return;
+  const velas = (d.velas || []).filter(v => v && v.t != null);
+  $('chart-empty').style.display = velas.length ? 'none' : 'flex';
+  if (!velas.length) return;
+
+  // Sin horas repetidas y en orden (lo exige la librería)
+  const porT = new Map();
+  velas.forEach((v, i) => porT.set(v.t, { v, i }));
+  const orden = [...porT.values()].sort((a, b) => a.v.t - b.v.t);
+
+  const candles = orden.map(({ v }) => ({ time: local(v.t), open: v.o, high: v.h, low: v.l, close: v.c }));
+  const e7  = orden.map(({ v, i }) => ({ time: local(v.t), value: d.ema7_serie?.[i] })).filter(p => p.value != null);
+  const e10 = orden.map(({ v, i }) => ({ time: local(v.t), value: d.ema10_serie?.[i] })).filter(p => p.value != null);
+
+  // Si cambió la primera vela (o se reinició el bot) cargamos todo de nuevo
+  const firma = `${candles[0].time}`;
+  if (firma !== firmaVelas || candles[candles.length - 1].time < ultimaT) {
+    velasSerie.setData(candles); ema7Serie.setData(e7); ema10Serie.setData(e10);
+    // Ajustar el zoom cuando el contenedor ya tiene tamaño (autoSize mide de forma asíncrona)
+    if (!firmaVelas) setTimeout(() => chart.timeScale().fitContent(), 150);
+    firmaVelas = firma;
+  } else {
+    // Mismo arranque: solo la vela en curso y las nuevas (update no acepta velas anteriores)
+    const nuevas = arr => arr.filter(p => p.time >= ultimaT);
+    nuevas(candles).forEach(c => velasSerie.update(c));
+    nuevas(e7).forEach(p => ema7Serie.update(p));
+    nuevas(e10).forEach(p => ema10Serie.update(p));
+  }
+  ultimaT = candles[candles.length - 1].time;
+
+  // Líneas de entrada / TP / SL
+  lineasPrecio.forEach(l => velasSerie.removePriceLine(l));
+  lineasPrecio = [];
+  const linea = (price, color, title, style) => price != null && lineasPrecio.push(
+    velasSerie.createPriceLine({ price, color, title, lineWidth: 1, lineStyle: style, axisLabelVisible: true }));
+  niveles = d.posicion_abierta
+    ? [d.precio_entrada, d.take_profit_precio, d.stop_loss_precio].filter(n => n != null) : [];
+  if (d.posicion_abierta) {
+    linea(d.precio_entrada, css('--text'), d.posicion_abierta, LC.LineStyle.Dashed);
+    linea(d.take_profit_precio, css('--green'), 'TP', LC.LineStyle.Solid);
+    linea(d.stop_loss_precio, css('--red'), 'SL', LC.LineStyle.Solid);
+  }
+
+  // Marcas de entradas y salidas
+  const seg = d.vela_seg || 60, t0 = candles[0].time, tN = candles[candles.length - 1].time;
+  const enVela = t => local(Math.floor(t / seg) * seg);
+  const marcas = [];
+  (d.operaciones || []).forEach(op => {
+    const larga = op.posicion === 'LONG';
+    if (op.t_entrada) marcas.push({ time: enVela(op.t_entrada), position: larga ? 'belowBar' : 'aboveBar',
+      color: larga ? css('--green') : css('--red'), shape: larga ? 'arrowUp' : 'arrowDown', text: larga ? 'L' : 'S' });
+    if (op.t_salida) marcas.push({ time: enVela(op.t_salida), position: larga ? 'aboveBar' : 'belowBar',
+      color: op.resultado >= 0 ? css('--green') : css('--red'), shape: 'circle', text: money(op.resultado) });
+  });
+  if (d.posicion_abierta && d.t_entrada) {
+    const larga = d.posicion_abierta === 'LONG';
+    marcas.push({ time: enVela(d.t_entrada), position: larga ? 'belowBar' : 'aboveBar',
+      color: larga ? css('--green') : css('--red'), shape: larga ? 'arrowUp' : 'arrowDown', text: larga ? 'LONG' : 'SHORT' });
+  }
+  velasSerie.setMarkers(marcas.filter(m => m.time >= t0 && m.time <= tN).sort((a, b) => a.time - b.time));
+}
+
+// ══════════════════════════════════════════════
+//  ESTADO DEL BOT
+// ══════════════════════════════════════════════
+const ESTADOS = {
+  OPERANDO:        ['Operando', 'green'],
+  FUERA_HORARIO:   ['Fuera de horario', 'gray'],
+  PAUSADO:         ['Pausado (/stop)', 'amber'],
+  CIRCUIT_BREAKER: ['Circuit breaker', 'red'],
+  TOKEN_VENCIDO:   ['Token vencido', 'red'],
+  DETENIDO:        ['Detenido', 'red'],
+};
+
+let ultimo = null;        // último estado.json leído
+let fallos = 0;
+
+async function leerEstado() {
+  try {
+    const resp = await fetch('estado.json?t=' + Date.now(), { cache: 'no-store' });
+    if (!resp.ok) throw new Error('sin archivo');
+    ultimo = await resp.json();
+    fallos = 0;
+    actualizarUI(ultimo);
+  } catch (e) {
+    fallos++;
+  }
+  actualizarConexion();
+}
+
+function actualizarConexion() {
+  const dot = $('conn-dot'), txt = $('conn-text'), ban = $('offline-banner');
+  const edad = ultimo?.ts ? Date.now() / 1000 - ultimo.ts : null;
+  let estadoConn = 'live', texto = 'En vivo', aviso = '';
+
+  if (fallos >= 3 && !ultimo) {
+    estadoConn = 'off'; texto = 'Sin conexión';
+    aviso = 'No encuentro estado.json — ¿el bot está corriendo?';
+  } else if (fallos >= 3) {
+    estadoConn = 'off'; texto = 'Sin conexión';
+    aviso = 'No puedo leer estado.json — se cerró el servidor del dashboard.';
+  } else if (ultimo?.estado_bot === 'DETENIDO') {
+    estadoConn = 'off'; texto = 'Detenido';
+    aviso = 'El bot se detuvo. Volvé a abrir Arrancar_Bot.';
+  } else if (edad != null && edad > 75) {
+    estadoConn = 'off'; texto = `Sin datos hace ${duracion(edad)}`;
+    aviso = `El bot no actualiza desde hace ${duracion(edad)} — ¿se cerró la terminal?`;
+  } else if (edad != null && edad > 10) {
+    estadoConn = 'slow'; texto = `Hace ${Math.round(edad)} s`;
+  }
+  dot.className = 'dot ' + estadoConn;
+  txt.textContent = texto;
+  txt.className = estadoConn === 'live' ? 'green' : estadoConn === 'slow' ? 'amber' : 'red';
+  ban.textContent = aviso;
+  ban.classList.toggle('visible', !!aviso);
+  if (ultimo?.ts) $('y-upd').textContent = edad < 5 ? 'ahora' : `hace ${duracion(edad)}`;
+}
+
+// ══════════════════════════════════════════════
+//  ACTUALIZAR UI
+// ══════════════════════════════════════════════
+function actualizarUI(d) {
+  const velas = d.velas || [];
+  const seg = d.vela_seg || 60;
+  const precio = d.precio_actual;
+  const estadoBot = d.estado_bot || 'OPERANDO';
+
+  // ── Topbar ──
+  const contrato = d.contrato && d.contrato !== d.simbolo ? d.contrato.replace('/', '') : '';
+  $('symbol-pill').textContent = [d.simbolo, contrato, `${seg / 60}m`].filter(Boolean).join(' · ');
+  const [estTxt, estCls] = ESTADOS[estadoBot] || [estadoBot, 'gray'];
+  $('estado-pill').textContent = estadoBot === 'FUERA_HORARIO' ? `${estTxt} · reabre ${d.reabre || d.hora_apertura}` : estTxt;
+  $('estado-pill').className = `pill ${estCls}`;
+  $('mode-pill').textContent = d.modo === 'REAL' ? 'REAL' : 'PAPER';
+  $('mode-pill').className = 'pill ' + (d.modo === 'REAL' ? 'red' : 'amber');
+  $('chart-title').textContent = `Velas de ${seg / 60} min · ${d.contrato || d.simbolo || ''}`;
+
+  // ── Aviso de token ──
+  const tb = $('token-banner');
+  tb.textContent = d.aviso_token ? (d.token_vencido ? '⛔ ' : '🔑 ') + d.aviso_token : '';
+  tb.className = 'banner ' + (d.token_vencido ? 'red' : 'amber') + (d.aviso_token ? ' visible' : '');
+
+  // ── Precio ──
+  const cierrePrev = velas.length > 1 ? velas[velas.length - 2].c : null;
+  if (precio) {
+    const cambio = cierrePrev != null ? precio - cierrePrev : null;
+    setText('k-precio', fmt(precio), colorOf(cambio));
+    $('k-precio-sub').textContent = cambio != null ? `${signed(cambio)} vs vela anterior` : 'primera lectura';
+  }
+
+  // ── P&L del día ──
+  const ops = d.operaciones || [];
+  const ganadas = ops.filter(o => o.resultado > 0).length;
+  setText('k-pnl', money(d.pnl_paper || 0), colorOf(d.pnl_paper || 0));
+  const totalComision = ops.reduce((a, o) => a + (o.comision || 0), 0);
+  $('k-pnl-sub').textContent = ops.length
+    ? `${ops.length} ops · ${ganadas}G/${ops.length - ganadas}P · ${Math.round(ganadas / ops.length * 100)}% · comis. $${fmt(totalComision)}`
+    : 'sin operaciones cerradas';
+
+  // ── Posición ──
+  const pos = d.posicion_abierta;
+  if (pos) {
+    setText('k-pos', `${pos} ${money(d.pnl_abierto)}`, colorOf(d.pnl_abierto));
+    const aTp = d.take_profit_precio != null ? Math.abs(d.take_profit_precio - precio) : null;
+    const aSl = d.stop_loss_precio != null ? Math.abs(d.stop_loss_precio - precio) : null;
+    const ptsBrutos = precio != null && d.precio_entrada != null ? (precio - d.precio_entrada) * (pos === 'LONG' ? 1 : -1) : null;
+    $('k-pos-sub').textContent = `@ ${fmt(d.precio_entrada)} · ${signed(ptsBrutos)} pts · neto de comisión · TP a ${fmt(aTp)} · SL a ${aSl != null ? fmt(aSl) : '—'}`;
+  } else {
+    setText('k-pos', 'FLAT', 'muted');
+    $('k-pos-sub').textContent = 'sin posición abierta';
+  }
+
+  // ── Señal ──
+  const senal = d['señal'];
+  let sTxt = '—', sCls = 'muted', sSub = '';
+  if (estadoBot !== 'OPERANDO') {
+    sTxt = '—'; sSub = 'el bot no está buscando entradas';
+  } else if (pos) {
+    sTxt = 'En posición'; sCls = ''; sSub = 'sale solo por TP o SL';
+  } else if (d.senal_pendiente) {
+    const compra = d.senal_pendiente === 'COMPRAR';
+    sTxt = (compra ? '▲ ' : '▼ ') + d.senal_pendiente; sCls = 'amber';
+    sSub = 'cruce detectado · confirma al cierre de esta vela';
+  } else if (senal === 'ESPERANDO') {
+    sTxt = 'Cargando'; sSub = `juntando velas (${Math.min(velas.length, 20)}/20)`;
+  } else if (senal === 'COMPRAR' || senal === 'VENDER') {
+    sTxt = (senal === 'COMPRAR' ? '▲ ' : '▼ ') + 'Cruce'; sCls = senal === 'COMPRAR' ? 'green' : 'red';
+    sSub = 'en la vela en curso · se evalúa al cierre';
+  } else if (senal === 'LATERAL') {
+    sTxt = 'Lateral'; sSub = 'ADX bajo · sin entradas';
+  } else {
+    sTxt = 'Sin cruce'; sSub = d.ema7 != null && d.ema10 != null
+      ? `EMA 7 ${d.ema7 > d.ema10 ? 'arriba' : 'abajo'} de EMA 10` : '';
+  }
+  setText('k-senal', sTxt, sCls);
+  $('k-senal-sub').textContent = sSub;
+
+  // ── Estrategia ──
+  $('s-ema7').textContent = fmt(d.ema7);
+  $('s-ema10').textContent = fmt(d.ema10);
+  $('lg-ema7').textContent = fmt(d.ema7);
+  $('lg-ema10').textContent = fmt(d.ema10);
+  const diff = d.ema7 != null && d.ema10 != null ? d.ema7 - d.ema10 : null;
+  setText('s-diff', signed(diff, 2), colorOf(diff));
+  $('s-adx').textContent = d.adx != null ? fmt(d.adx, 1) : '—';
+  $('s-tpsl').textContent = `${d.take_profit_puntos ?? '—'} / ${d.stop_loss_puntos || 'off'} pts`;
+  $('s-vpp').textContent = d.valor_punto ? `$${fmt(d.valor_punto)}` : '—';
+  $('s-horario').textContent = d.hora_apertura ? `${d.hora_apertura} → ${d.hora_cierre}` : '—';
+
+  // ── Riesgo ──
+  const perd = d.perdida_acumulada || 0, maxPerd = d.max_perdida || 0;
+  const nOps = d.operaciones_hoy || 0, maxOps = d.max_operaciones || 0;
+  const pctPerd = maxPerd ? Math.min(perd / maxPerd * 100, 100) : 0;
+  $('r-perd').textContent = `$${fmt(perd, 0)} / $${fmt(maxPerd, 0)}`;
+  $('r-perd-bar').style.width = pctPerd + '%';
+  $('r-perd-bar').style.background = pctPerd > 70 ? css('--red') : pctPerd > 40 ? css('--amber') : css('--green');
+  $('r-ops').textContent = `${nOps} / ${maxOps}`;
+  $('r-ops-bar').style.width = (maxOps ? Math.min(nOps / maxOps * 100, 100) : 0) + '%';
+
+  // ── Sistema ──
+  if (d.token_vence_ts) {
+    const resta = d.token_vence_ts - Date.now() / 1000;
+    setText('y-token', resta > 0 ? `vence en ${duracion(resta)}` : 'VENCIDO',
+      resta <= 0 ? 'red' : resta < 86400 ? 'amber' : 'green');
+    $('y-token').title = `Vence el ${d.token_vence}`;
+  } else {
+    $('y-token').textContent = d.token_vence || '—';
+  }
+  setText('y-tg', d.telegram_ok ? 'OK' : 'ERROR', d.telegram_ok ? 'green' : 'red');
+  $('y-velas').textContent = d.velas_procesadas ?? '—';
+
+  // ── Operaciones ──
+  $('ops-empty').style.display = ops.length ? 'none' : 'block';
+  $('ops-body').innerHTML = ops.slice().reverse().map(o => `<tr>
+      <td class="muted">${esc(o.hora)}</td>
+      <td><span class="tag tag-${esc(o.posicion)}">${esc(o.posicion)}</span></td>
+      <td class="r">${fmt(o.entrada)}</td>
+      <td class="r">${fmt(o.salida)}</td>
+      <td class="r ${colorOf(o.puntos)}">${signed(o.puntos)}</td>
+      <td class="r muted">${o.comision != null ? '−$' + fmt(o.comision) : '—'}</td>
+      <td class="r ${colorOf(o.resultado)}">${money(o.resultado)}</td>
+      <td class="wrap">${esc(o.motivo)}</td>
+    </tr>`).join('');
+  const sumPts = ops.reduce((a, o) => a + (o.puntos || 0), 0);
+  const mejor = ops.length ? Math.max(...ops.map(o => o.resultado)) : null;
+  const peor  = ops.length ? Math.min(...ops.map(o => o.resultado)) : null;
+  $('ops-summary').innerHTML = ops.length
+    ? `<span>${signed(sumPts)} pts</span><span>comisiones −$${fmt(totalComision)}</span><span>mejor <b class="green">${money(mejor)}</b></span><span>peor <b class="red">${money(peor)}</b></span>`
+    : '';
+
+  // ── Log ──
+  const log = d.log || [];
+  $('log-count').textContent = `${log.length} eventos`;
+  $('log-empty').style.display = log.length ? 'none' : 'block';
+  $('log-body').innerHTML = log.map(l => `<tr>
+      <td class="muted">${esc(l.hora)}</td>
+      <td><span class="tag tag-${esc(l.tipo)}">${esc(l.tipo)}</span></td>
+      <td class="r">${l.precio != null ? fmt(l.precio) : '—'}</td>
+      <td class="wrap">${esc(l.mensaje)}</td>
+    </tr>`).join('');
+
+  // ── Pestaña del navegador ──
+  document.title = precio
+    ? `${fmt(precio)} · ${pos ? `${pos} ${money(d.pnl_abierto)}` : 'FLAT'} · Gerardo_Bot`
+    : 'Gerardo_Bot';
+
+  try {
+    actualizarGrafico(d);
+  } catch (e) {
+    console.error('Error en el gráfico:', e);   // que un problema del gráfico no frene el resto
+  }
+}
+
+// ══════════════════════════════════════════════
+//  RELOJ, CUENTA REGRESIVA Y POLLING
+// ══════════════════════════════════════════════
+function tic() {
+  $('clock').textContent = new Date().toLocaleTimeString('es-AR', { hour12: false });
+  const seg = ultimo?.vela_seg || 60;
+  const ahora = Date.now() / 1000;
+  const falta = seg - (ahora % seg);
+  if (ultimo && ultimo.estado_bot === 'OPERANDO') {
+    $('k-vela').textContent = `${Math.floor(falta / 60)}:${String(Math.floor(falta % 60)).padStart(2, '0')}`;
+    $('k-vela-bar').style.width = ((seg - falta) / seg * 100) + '%';
+  } else {
+    $('k-vela').textContent = '—';
+    $('k-vela-bar').style.width = '0%';
+  }
+  actualizarConexion();
+}
+
+setInterval(tic, 250);
+leerEstado();
+setInterval(leerEstado, 1000);
+</script>
+</body>
+</html>

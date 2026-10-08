@@ -1,0 +1,21 @@
+CAMBIAR DE ESTRATEGIA
+=====================
+
+1. Cerrá el bot (cerrá la ventana de Terminal donde corre).
+2. En la carpeta "Bot Gerardo", doble clic en  "Cambiar Estrategia"  (la app).
+   Te muestra cuál está puesta y te deja elegir con botones:
+     Original   → cruce alcista compra, TP 3 pts, tope $1000 de pérdida y 50 operaciones por día
+     Invertida  → cruce alcista vende, TP 3.5 pts (14 ticks), sin límites
+3. Arrancá el bot normalmente (Arrancar_Bot-2.command).
+
+La elección queda guardada: no hace falta repetirla cada vez que abrís el bot.
+
+Qué hace por dentro (cambiar_estrategia.py): copia los archivos de la carpeta
+"original" o "invertida" a la carpeta del bot y cambia en .env solo
+TAKE_PROFIT_PUNTOS, MAX_PERDIDA_DIARIA_USD, MAX_OPERACIONES_DIA e INVERTIR_ESTRATEGIA.
+Las claves de Schwab y Telegram no se tocan. Lo que estaba puesto antes queda
+guardado en "ultimo_reemplazado".
+
+OJO: si más adelante se cambia algo en main.py u otro archivo del bot, hay que
+actualizar también la copia en "invertida" (o "original"), porque si no, al
+cambiar de estrategia se pisa ese cambio.

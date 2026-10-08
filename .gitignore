@@ -1,0 +1,19 @@
+# Credenciales y datos privados
+.env
+.env.*
+!.env.example
+.auth_context.json
+token.json
+sesion.json
+estado.json
+
+# Archivos generados y registros
+.DS_Store
+.venv/
+__pycache__/
+*.py[cod]
+*.lock
+*.log
+*.log.*
+logs_viejos/
+Bot_Gerardo_codigo.zip

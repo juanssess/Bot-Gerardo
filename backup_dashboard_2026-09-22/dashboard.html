@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerardo_Bot</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg0:#080b12; --bg1:#0d1120; --bg2:#111827; --bg3:#1a2035;
+    --border:rgba(255,255,255,.07); --border2:rgba(255,255,255,.12);
+    --text:#e2e8f0; --muted:#4a5568; --muted2:#718096;
+    --green:#00d084; --green2:rgba(0,208,132,.12); --green3:rgba(0,208,132,.06);
+    --red:#ff4757; --red2:rgba(255,71,87,.12);
+    --blue:#4a90d9; --blue2:rgba(74,144,217,.15);
+    --amber:#ffa502;
+    --mono:'JetBrains Mono',monospace; --sans:'Inter',sans-serif;
+  }
+  html,body { height:100%; background:var(--bg0); color:var(--text); font-family:var(--sans); font-size:14px; }
+  .app { display:grid; grid-template-rows:52px 1fr; height:100vh; }
+  .main { display:grid; grid-template-columns:260px 1fr; overflow:hidden; }
+  .sidebar { background:var(--bg1); border-right:1px solid var(--border); display:flex; flex-direction:column; overflow-y:auto; }
+  .content { display:flex; flex-direction:column; overflow-y:auto; padding:20px; gap:16px; }
+
+  .topbar { background:var(--bg1); border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; padding:0 20px; grid-column:1/-1; }
+  .topbar-left { display:flex; align-items:center; gap:14px; }
+  .logo { font-family:var(--mono); font-size:13px; font-weight:500; color:var(--green); letter-spacing:.04em; }
+  .sep { width:1px; height:18px; background:var(--border2); }
+  .symbol-pill { font-family:var(--mono); font-size:11px; font-weight:500; background:var(--blue2); color:var(--blue); padding:3px 10px; border-radius:99px; border:1px solid rgba(74,144,217,.25); }
+  .topbar-right { display:flex; align-items:center; gap:16px; }
+  .status-dot { width:7px; height:7px; border-radius:50%; background:var(--green); }
+  .status-dot.offline { background:var(--red); animation:none; }
+  .status-dot.live { animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+  .status-text { font-size:12px; color:var(--green); font-family:var(--mono); }
+  .status-text.offline { color:var(--red); }
+  .time-display { font-family:var(--mono); font-size:12px; color:var(--muted2); }
+  .mode-badge { font-size:11px; padding:3px 10px; border-radius:99px; background:rgba(255,165,2,.12); color:var(--amber); border:1px solid rgba(255,165,2,.25); font-weight:500; }
+  .mode-badge.real { background:var(--green2); color:var(--green); border-color:rgba(0,208,132,.25); }
+
+  .side-section { padding:16px; border-bottom:1px solid var(--border); }
+  .side-label { font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+  .price-hero { text-align:center; padding:8px 0; }
+  .price-symbol { font-size:11px; color:var(--muted2); font-family:var(--mono); margin-bottom:4px; }
+  .price-value { font-family:var(--mono); font-size:32px; font-weight:500; color:var(--green); letter-spacing:-.01em; transition:color .3s; }
+  .price-change { font-size:12px; font-family:var(--mono); margin-top:4px; }
+  .price-change.up { color:var(--green); } .price-change.down { color:var(--red); }
+
+  .ema-row { display:flex; justify-content:space-between; align-items:center; padding:6px 0; }
+  .ema-row:not(:last-child) { border-bottom:1px solid var(--border); }
+  .ema-name { font-size:12px; color:var(--muted2); font-family:var(--mono); }
+  .ema-val { font-size:13px; font-weight:500; font-family:var(--mono); color:var(--text); }
+  .ema-diff { font-size:10px; font-family:var(--mono); padding:1px 6px; border-radius:4px; }
+  .ema-diff.pos { background:var(--green2); color:var(--green); } .ema-diff.neg { background:var(--red2); color:var(--red); }
+
+  .signal-card { border-radius:8px; padding:12px; text-align:center; transition:all .3s; }
+  .signal-card.buy { background:var(--green2); border:1px solid rgba(0,208,132,.3); }
+  .signal-card.sell { background:var(--red2); border:1px solid rgba(255,71,87,.3); }
+  .signal-card.neutral { background:var(--bg3); border:1px solid var(--border); }
+  .signal-icon { font-size:22px; margin-bottom:4px; }
+  .signal-name { font-size:13px; font-weight:600; letter-spacing:.04em; }
+  .signal-card.buy .signal-name { color:var(--green); } .signal-card.sell .signal-name { color:var(--red); } .signal-card.neutral .signal-name { color:var(--muted2); }
+  .signal-time { font-size:10px; font-family:var(--mono); margin-top:3px; }
+  .signal-card.buy .signal-time { color:rgba(0,208,132,.6); } .signal-card.sell .signal-time { color:rgba(255,71,87,.6); } .signal-card.neutral .signal-time { color:var(--muted); }
+
+  .stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .stat { background:var(--bg3); border-radius:8px; padding:10px; border:1px solid var(--border); }
+  .stat-label { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:4px; }
+  .stat-val { font-size:16px; font-weight:500; font-family:var(--mono); color:var(--text); }
+  .stat-val.green { color:var(--green); } .stat-val.red { color:var(--red); }
+
+  .card { background:var(--bg1); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+  .card-header { padding:12px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+  .card-title { font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted2); }
+  .card-body { padding:16px; }
+
+  .chart-wrap { position:relative; height:180px; }
+  .metrics-row { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+  .metric { background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+  .metric-label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px; }
+  .metric-val { font-size:22px; font-weight:600; font-family:var(--mono); color:var(--text); }
+  .metric-val.green { color:var(--green); } .metric-val.red { color:var(--red); } .metric-val.amber { color:var(--amber); }
+  .metric-sub { font-size:11px; color:var(--muted); margin-top:3px; font-family:var(--mono); }
+
+  .log-table { width:100%; border-collapse:collapse; font-family:var(--mono); font-size:12px; }
+  .log-table th { text-align:left; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); padding:0 10px 10px; font-weight:600; }
+  .log-table td { padding:8px 10px; border-top:1px solid var(--border); vertical-align:middle; }
+  .log-table tr:hover td { background:rgba(255,255,255,.02); }
+  .tag { font-size:10px; padding:2px 7px; border-radius:4px; font-weight:600; letter-spacing:.04em; }
+  .tag-COMPRA { background:var(--green2); color:var(--green); border:1px solid rgba(0,208,132,.25); }
+  .tag-VENTA  { background:var(--red2); color:var(--red); border:1px solid rgba(255,71,87,.25); }
+  .tag-INFO   { background:var(--blue2); color:var(--blue); border:1px solid rgba(74,144,217,.25); }
+  .tag-WARN   { background:rgba(255,165,2,.12); color:var(--amber); border:1px solid rgba(255,165,2,.25); }
+  td.price-td { color:var(--text); } td.msg-td { color:var(--muted2); } td.time-td { color:var(--muted); }
+
+  .cb-bar-bg { height:4px; background:var(--bg3); border-radius:2px; margin-top:6px; }
+  .cb-bar { height:4px; border-radius:2px; transition:width .5s, background .5s; }
+
+  .offline-banner { display:none; background:rgba(255,71,87,.1); border:1px solid rgba(255,71,87,.3); border-radius:8px; padding:10px 14px; font-size:12px; color:var(--red); font-family:var(--mono); text-align:center; }
+  .offline-banner.visible { display:block; }
+
+  .token-banner { display:none; background:rgba(255,165,2,.1); border:1px solid rgba(255,165,2,.3); border-radius:8px; padding:10px 14px; font-size:12px; color:var(--amber); font-family:var(--mono); text-align:center; }
+  .token-banner.visible { display:block; }
+  .token-banner.vencido { background:rgba(255,71,87,.1); border-color:rgba(255,71,87,.3); color:var(--red); }
+
+  ::-webkit-scrollbar { width:4px; }
+  ::-webkit-scrollbar-track { background:transparent; }
+  ::-webkit-scrollbar-thumb { background:var(--bg3); border-radius:2px; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="logo">Gerardo_Bot</span>
+      <span class="sep"></span>
+      <span class="symbol-pill" id="symbol-pill">/ES · 1min</span>
+    </div>
+    <div class="topbar-right">
+      <span class="mode-badge" id="mode-badge">PAPER TRADING</span>
+      <span class="sep"></span>
+      <span class="status-dot" id="status-dot"></span>
+      <span class="status-text" id="status-text">Conectando...</span>
+      <span class="sep"></span>
+      <span class="time-display" id="clock">--:--:--</span>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="sidebar">
+
+      <div class="side-section">
+        <div class="side-label">Precio actual</div>
+        <div class="price-hero">
+          <div class="price-symbol" id="sidebar-symbol">/ES · S&P 500 Futuro</div>
+          <div class="price-value" id="price-display">—</div>
+          <div class="price-change" id="price-change">Esperando al bot...</div>
+        </div>
+      </div>
+
+      <div class="side-section">
+        <div class="side-label">EMAs</div>
+        <div class="ema-row">
+          <span class="ema-name">EMA 6</span>
+          <span class="ema-val" id="ema6-val">—</span>
+          <span class="ema-diff pos" id="ema6-diff">—</span>
+        </div>
+        <div class="ema-row">
+          <span class="ema-name">EMA 10</span>
+          <span class="ema-val" id="ema10-val">—</span>
+        </div>
+        <div class="ema-row" style="border:none;padding-top:10px;">
+          <span class="ema-name" style="font-size:10px;">Diferencia</span>
+          <span class="ema-val" id="ema-spread" style="font-size:11px;">—</span>
+        </div>
+      </div>
+
+      <div class="side-section">
+        <div class="side-label">Última señal</div>
+        <div class="signal-card neutral" id="signal-card">
+          <div class="signal-icon" id="signal-icon">—</div>
+          <div class="signal-name" id="signal-name">ESPERANDO</div>
+          <div class="signal-time" id="signal-time">Sin señal aún</div>
+        </div>
+      </div>
+
+      <div class="side-section">
+        <div class="side-label">Estadísticas del día</div>
+        <div class="stat-grid">
+          <div class="stat"><div class="stat-label">Señales</div><div class="stat-val green" id="stat-signals">0</div></div>
+          <div class="stat"><div class="stat-label">Compras</div><div class="stat-val green" id="stat-buys">0</div></div>
+          <div class="stat"><div class="stat-label">Ventas</div><div class="stat-val red" id="stat-sells">0</div></div>
+          <div class="stat"><div class="stat-label">P&L paper</div><div class="stat-val" id="stat-pnl">$0</div></div>
+        </div>
+      </div>
+
+      <div class="side-section" style="border:none;">
+        <div class="side-label">Circuit breaker</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+          <span style="font-size:11px;color:var(--muted2);">Pérdida diaria</span>
+          <span style="font-size:11px;font-family:var(--mono);color:var(--green)" id="cb-val">$0 / $500</span>
+        </div>
+        <div class="cb-bar-bg"><div class="cb-bar" id="cb-bar" style="width:0%"></div></div>
+        <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:11px;color:var(--muted2);">Operaciones</span>
+          <span style="font-size:11px;font-family:var(--mono);color:var(--text)" id="ops-val">0 / 10</span>
+        </div>
+        <div class="cb-bar-bg"><div class="cb-bar" id="ops-bar" style="width:0%;background:var(--blue)"></div></div>
+      </div>
+
+    </div>
+
+    <div class="content">
+
+      <div class="offline-banner" id="offline-banner">
+        Bot desconectado — esperando estado.json... Asegurate de que main.py esté corriendo.
+      </div>
+
+      <div class="token-banner" id="token-banner"></div>
+
+      <div class="metrics-row">
+        <div class="metric">
+          <div class="metric-label">Velas procesadas</div>
+          <div class="metric-val" id="m-velas">—</div>
+          <div class="metric-sub">desde el inicio</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Última señal</div>
+          <div class="metric-val" id="m-cruce">—</div>
+          <div class="metric-sub" id="m-cruce-sub">sin señal aún</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Posición abierta</div>
+          <div class="metric-val" id="m-posicion">—</div>
+          <div class="metric-sub" id="m-posicion-sub">—</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Telegram</div>
+          <div class="metric-val green" id="m-telegram">—</div>
+          <div class="metric-sub" id="m-telegram-sub">—</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Precio · últimas 40 velas</span>
+          <span style="font-size:11px;color:var(--muted);font-family:var(--mono);" id="chart-updated">—</span>
+        </div>
+        <div class="card-body" style="padding:12px 16px 16px;">
+          <div class="chart-wrap">
+            <canvas id="priceChart" role="img" aria-label="Gráfico de precio con EMA 6 y EMA 10">Gráfico de precios en tiempo real.</canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Log de actividad</span>
+          <span style="font-size:11px;color:var(--muted2);font-family:var(--mono);" id="log-count">0 eventos</span>
+        </div>
+        <div class="card-body" style="padding:0;max-height:280px;overflow-y:auto;">
+          <table class="log-table">
+            <thead><tr>
+              <th style="width:80px;">Hora</th>
+              <th style="width:72px;">Tipo</th>
+              <th style="width:96px;">Precio</th>
+              <th>Mensaje</th>
+            </tr></thead>
+            <tbody id="log-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+// ══════════════════════════════════════════════
+//  CHART
+// ══════════════════════════════════════════════
+const ctx = document.getElementById('priceChart').getContext('2d');
+const chart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: [],
+    datasets: [
+      { label:'Precio', data:[], borderColor:'#4a90d9', borderWidth:1.5, pointRadius:0, tension:0.3, fill:false },
+      { label:'EMA 6',  data:[], borderColor:'#00d084', borderWidth:1.5, pointRadius:0, tension:0.3, fill:false },
+      { label:'EMA 10',  data:[], borderColor:'#ff4757', borderWidth:1.5, pointRadius:0, tension:0.3, fill:false, borderDash:[4,3] },
+    ],
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    animation:{ duration:300 },
+    plugins:{
+      legend:{ display:false },
+      tooltip:{
+        backgroundColor:'#1a2035', borderColor:'rgba(255,255,255,.1)', borderWidth:1,
+        titleColor:'#718096', bodyColor:'#e2e8f0',
+        titleFont:{family:'JetBrains Mono',size:10}, bodyFont:{family:'JetBrains Mono',size:11},
+      },
+    },
+    scales:{
+      x:{ ticks:{color:'#4a5568',font:{family:'JetBrains Mono',size:10},maxRotation:0,autoSkip:true,maxTicksLimit:8}, grid:{color:'rgba(255,255,255,.04)'}, border:{color:'rgba(255,255,255,.07)'} },
+      y:{ ticks:{color:'#4a5568',font:{family:'JetBrains Mono',size:10}}, grid:{color:'rgba(255,255,255,.04)'}, border:{color:'rgba(255,255,255,.07)'} },
+    },
+  },
+});
+
+// ══════════════════════════════════════════════
+//  ESTADO LOCAL
+// ══════════════════════════════════════════════
+let precioAnterior = null;
+let ultimaSenal = null;
+let intentosFallidos = 0;
+
+// ══════════════════════════════════════════════
+//  LECTURA DE ESTADO.JSON
+// ══════════════════════════════════════════════
+async function leerEstado() {
+  try {
+    const resp = await fetch('estado.json?t=' + Date.now());
+    if (!resp.ok) throw new Error('sin archivo');
+    const d = await resp.json();
+    intentosFallidos = 0;
+    actualizarUI(d);
+    document.getElementById('offline-banner').classList.remove('visible');
+    document.getElementById('status-dot').className = 'status-dot live';
+    document.getElementById('status-text').textContent = 'En vivo';
+    document.getElementById('status-text').className = 'status-text';
+  } catch(e) {
+    intentosFallidos++;
+    if (intentosFallidos >= 3) {
+      document.getElementById('offline-banner').classList.add('visible');
+      document.getElementById('status-dot').className = 'status-dot offline';
+      document.getElementById('status-text').textContent = 'Bot offline';
+      document.getElementById('status-text').className = 'status-text offline';
+    }
+  }
+}
+
+// ══════════════════════════════════════════════
+//  ACTUALIZAR UI CON DATOS REALES
+// ══════════════════════════════════════════════
+function actualizarUI(d) {
+
+  // Aviso del token de Schwab
+  const tb = document.getElementById('token-banner');
+  if (d.aviso_token) {
+    tb.textContent = (d.token_vencido ? '⛔ ' : '🔑 ') + d.aviso_token;
+    tb.className = 'token-banner visible' + (d.token_vencido ? ' vencido' : '');
+  } else {
+    tb.className = 'token-banner';
+  }
+
+  // Precio
+  if (d.precio_actual) {
+    const precio = d.precio_actual;
+    document.getElementById('price-display').textContent =
+      precio.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+    const chEl = document.getElementById('price-change');
+    if (precioAnterior !== null) {
+      const diff = precio - precioAnterior;
+      const pct = ((diff / precioAnterior) * 100).toFixed(2);
+      chEl.textContent = `${diff >= 0 ? '+' : ''}${diff.toFixed(2)} (${diff >= 0 ? '+' : ''}${pct}%)`;
+      chEl.className = 'price-change ' + (diff >= 0 ? 'up' : 'down');
+      document.getElementById('price-display').style.color = diff >= 0 ? 'var(--green)' : 'var(--red)';
+    } else {
+      chEl.textContent = 'Primera lectura';
+    }
+    precioAnterior = precio;
+  }
+
+  // Symbol pill
+  if (d.simbolo) {
+    document.getElementById('symbol-pill').textContent = d.simbolo + ' · 1min';
+    document.getElementById('sidebar-symbol').textContent = d.simbolo + ' · Futuro';
+  }
+
+  // Modo
+  const modeBadge = document.getElementById('mode-badge');
+  if (d.modo === 'REAL') {
+    modeBadge.textContent = 'REAL';
+    modeBadge.className = 'mode-badge real';
+  } else {
+    modeBadge.textContent = 'PAPER TRADING';
+    modeBadge.className = 'mode-badge';
+  }
+
+  // EMAs
+  if (d.ema6 != null) {
+    document.getElementById('ema6-val').textContent = d.ema6.toFixed(2);
+    const diff = (d.ema6 - d.ema10).toFixed(2);
+    const diffEl = document.getElementById('ema6-diff');
+    diffEl.textContent = diff >= 0 ? `+${diff}` : diff;
+    diffEl.className = 'ema-diff ' + (diff >= 0 ? 'pos' : 'neg');
+    document.getElementById('ema-spread').textContent = `EMA3 - EMA8 = ${diff}`;
+  }
+  if (d.ema10 != null) document.getElementById('ema10-val').textContent = d.ema10.toFixed(2);
+
+  // Señal
+  const señal = d.señal;
+  if (señal === 'COMPRAR' && señal !== ultimaSenal) {
+    setSignalCard('buy', '▲', 'COMPRAR', d.timestamp);
+    ultimaSenal = señal;
+  } else if (señal === 'VENDER' && señal !== ultimaSenal) {
+    setSignalCard('sell', '▼', 'VENDER', d.timestamp);
+    ultimaSenal = señal;
+  }
+
+  // Stats
+  document.getElementById('stat-signals').textContent = (d.buys_hoy || 0) + (d.sells_hoy || 0);
+  document.getElementById('stat-buys').textContent = d.buys_hoy || 0;
+  document.getElementById('stat-sells').textContent = d.sells_hoy || 0;
+  const pnl = d.pnl_paper || 0;
+  const pnlEl = document.getElementById('stat-pnl');
+  pnlEl.textContent = `${pnl >= 0 ? '+' : ''}$${pnl.toFixed(0)}`;
+  pnlEl.className = 'stat-val ' + (pnl >= 0 ? 'green' : 'red');
+
+  // Circuit breaker
+  const perdida = d.perdida_acumulada || 0;
+  const maxPerd = d.max_perdida || 500;
+  const ops = d.operaciones_hoy || 0;
+  const maxOps = d.max_operaciones || 10;
+  const cbPct = Math.min((perdida / maxPerd) * 100, 100);
+  document.getElementById('cb-val').textContent = `$${perdida.toFixed(0)} / $${maxPerd}`;
+  document.getElementById('cb-bar').style.width = cbPct + '%';
+  document.getElementById('cb-bar').style.background = cbPct > 70 ? 'var(--red)' : cbPct > 40 ? 'var(--amber)' : 'var(--green)';
+  document.getElementById('ops-val').textContent = `${ops} / ${maxOps}`;
+  document.getElementById('ops-bar').style.width = Math.min((ops / maxOps) * 100, 100) + '%';
+
+  // Métricas
+  document.getElementById('m-velas').textContent = d.velas_procesadas || 0;
+
+  if (d.buys_hoy > 0 || d.sells_hoy > 0) {
+    const ultima = d.sells_hoy > 0 ? 'VENTA' : 'COMPRA';
+    const cruceEl = document.getElementById('m-cruce');
+    cruceEl.textContent = ultima;
+    cruceEl.className = 'metric-val ' + (ultima === 'COMPRA' ? 'green' : 'red');
+    document.getElementById('m-cruce-sub').textContent = d.timestamp || '';
+  }
+
+  const pos = d.posicion_abierta;
+  const posEl = document.getElementById('m-posicion');
+  posEl.textContent = pos || 'NINGUNA';
+  posEl.className = 'metric-val ' + (pos === 'LONG' ? 'green' : pos === 'SHORT' ? 'red' : '');
+  document.getElementById('m-posicion-sub').textContent = d.precio_entrada ? `entrada $${d.precio_entrada.toFixed(2)}` : '—';
+
+  const telEl = document.getElementById('m-telegram');
+  telEl.textContent = d.telegram_ok ? 'OK' : 'ERROR';
+  telEl.className = 'metric-val ' + (d.telegram_ok ? 'green' : 'red');
+  document.getElementById('m-telegram-sub').textContent = d.telegram_ok ? 'conectado' : 'revisar token';
+
+  // Chart
+  if (d.historial_precios && d.historial_precios.length > 1) {
+    const precios = d.historial_precios;
+
+    // Recalcular EMAs en el cliente para el gráfico
+    function emaArray(arr, span) {
+      const k = 2 / (span + 1);
+      let ema = arr[0];
+      return arr.map(p => { ema = p * k + ema * (1 - k); return parseFloat(ema.toFixed(2)); });
+    }
+    const ema6arr = emaArray(precios, 6);
+    const ema10arr = emaArray(precios, 10);
+
+    // Labels: índice de vela (no tenemos hora exacta de cada una)
+    const labels = precios.map((_, i) => i === precios.length - 1 ? d.timestamp : `${i + 1}`);
+
+    chart.data.labels = labels;
+    chart.data.datasets[0].data = precios;
+    chart.data.datasets[1].data = ema6arr;
+    chart.data.datasets[2].data = ema10arr;
+    chart.update('none');
+    document.getElementById('chart-updated').textContent = `actualizado ${d.timestamp}`;
+  }
+
+  // Log
+  if (d.log && d.log.length > 0) {
+    document.getElementById('log-count').textContent = `${d.log.length} eventos`;
+    document.getElementById('log-body').innerHTML = d.log.map(l => {
+      const tagClass = `tag-${l.tipo}`;
+      return `<tr>
+        <td class="time-td">${l.hora}</td>
+        <td><span class="tag ${tagClass}">${l.tipo}</span></td>
+        <td class="price-td">${l.precio != null ? '$' + parseFloat(l.precio).toFixed(2) : '—'}</td>
+        <td class="msg-td">${l.mensaje}</td>
+      </tr>`;
+    }).join('');
+  }
+}
+
+function setSignalCard(tipo, icono, nombre, hora) {
+  document.getElementById('signal-card').className = `signal-card ${tipo}`;
+  document.getElementById('signal-icon').textContent = icono;
+  document.getElementById('signal-name').textContent = nombre;
+  document.getElementById('signal-time').textContent = hora || '';
+}
+
+// ══════════════════════════════════════════════
+//  RELOJ Y POLLING
+// ══════════════════════════════════════════════
+setInterval(() => {
+  document.getElementById('clock').textContent = new Date().toLocaleTimeString('es-AR', {hour12:false});
+}, 1000);
+
+leerEstado();
+setInterval(leerEstado, 3000);
+</script>
+</body>
+</html>
