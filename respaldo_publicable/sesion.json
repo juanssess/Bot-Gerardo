@@ -1,0 +1,500 @@
+{
+  "perdida_acumulada": 0,
+  "operaciones_hoy": 14,
+  "pnl_paper": -85.86000000000013,
+  "buys_hoy": 7,
+  "sells_hoy": 7,
+  "reporte_enviado": false,
+  "posicion_abierta": null,
+  "precio_entrada": null,
+  "t_entrada": null,
+  "stop_loss_precio": null,
+  "take_profit_precio": null,
+  "sesion": "2026-09-28",
+  "operaciones": [
+    {
+      "entrada": 7780.0,
+      "salida": 7776.75,
+      "posicion": "LONG",
+      "resultado": -167.74,
+      "bruto": -162.5,
+      "comision": 5.24,
+      "motivo": "STOP LOSS",
+      "hora": "23:16:57",
+      "puntos": -3.25,
+      "t_entrada": 1790561700.430489,
+      "t_salida": 1790561817.535105
+    },
+    {
+      "entrada": 7776.0,
+      "salida": 7773.0,
+      "posicion": "SHORT",
+      "resultado": 144.76,
+      "bruto": 150.0,
+      "comision": 5.24,
+      "motivo": "TAKE PROFIT",
+      "hora": "00:35:00",
+      "puntos": 3.0,
+      "t_entrada": 1790565421.682233,
+      "t_salida": 1790566500.577749
+    },
+    {
+      "entrada": 7775.25,
+      "salida": 7772.25,
+      "posicion": "LONG",
+      "resultado": -155.24,
+      "bruto": -150.0,
+      "comision": 5.24,
+      "motivo": "STOP LOSS",
+      "hora": "00:59:12",
+      "puntos": -3.0,
+      "t_entrada": 1790567101.641811,
+      "t_salida": 1790567952.534751
+    },
+    {
+      "entrada": 7775.75,
+      "salida": 7778.75,
+      "posicion": "LONG",
+      "resultado": 144.76,
+      "bruto": 150.0,
+      "comision": 5.24,
+      "motivo": "TAKE PROFIT",
+      "hora": "01:20:56",
+      "puntos": 3.0,
+      "t_entrada": 1790568661.620652,
+      "t_salida": 1790569256.98986
+    },
+    {
+      "entrada": 7776.25,
+      "salida": 7773.25,
+      "posicion": "SHORT",
+      "resultado": 144.76,
+      "bruto": 150.0,
+      "comision": 5.24,
+      "motivo": "TAKE PROFIT",
+      "hora": "02:21:01",
+      "puntos": 3.0,
+      "t_entrada": 1790569920.591084,
+      "t_salida": 1790572861.024491
+    },
+    {
+      "entrada": 7775.75,
+      "salida": 7772.75,
+      "posicion": "LONG",
+      "resultado": -155.24,
+      "bruto": -150.0,
+      "comision": 5.24,
+      "motivo": "STOP LOSS",
+      "hora": "02:30:18",
+      "puntos": -3.0,
+      "t_entrada": 1790573341.904217,
+      "t_salida": 1790573418.204968
+    },
+    {
+      "entrada": 7772.75,
+      "salida": 7775.75,
+      "posicion": "SHORT",
+      "resultado": -155.24,
+      "bruto": -150.0,
+      "comision": 5.24,
+      "motivo": "STOP LOSS",
+      "hora": "02:33:25",
+      "puntos": -3.0,
+      "t_entrada": 1790573521.645005,
+      "t_salida": 1790573605.792672
+    },
+    {
+      "entrada": 7774.0,
+      "salida": 7777.0,
+      "posicion": "LONG",
+      "resultado": 144.76,
+      "bruto": 150.0,
+      "comision": 5.24,
+      "motivo": "TAKE PROFIT",
+      "hora": "03:00:04",
+      "puntos": 3.0,
+      "t_entrada": 1790574660.96066,
+      "t_salida": 1790575204.610621
+    },
+    {
+      "entrada": 7776.0,
+      "salida": 7773.0,
+      "posicion": "SHORT",
+      "resultado": 144.76,
+      "bruto": 150.0,
+      "comision": 5.24,
+      "motivo": "TAKE PROFIT",
+      "hora": "03:20:40",
+      "puntos": 3.0,
+      "t_entrada": 1790576340.862792,
+      "t_salida": 1790576440.722123
+    },
+    {
+      "entrada": 7773.5,
+      "salida": 7776.5,
+      "posicion": "LONG",
+      "resultado": 144.76,
+      "bruto": 150.0,
+      "comision": 5.24,
+      "motivo": "TAKE PROFIT",
+      "hora": "03:53:47",
+      "puntos": 3.0,
+      "t_entrada": 1790577540.419391,
+      "t_salida": 1790578427.017997
+    },
+    {
+      "entrada": 7773.75,
+      "salida": 7776.75,
+      "posicion": "SHORT",
+      "resultado": -155.24,
+      "bruto": -150.0,
+      "comision": 5.24,
+      "motivo": "STOP LOSS",
+      "hora": "03:59:54",
+      "puntos": -3.0,
+      "t_entrada": 1790578681.4936461,
+      "t_salida": 1790578794.635191
+    },
+    {
+      "entrada": 7772.0,
+      "salida": 7769.0,
+      "posicion": "SHORT",
+      "resultado": 144.76,
+      "bruto": 150.0,
+      "comision": 5.24,
+      "motivo": "TAKE PROFIT",
+      "hora": "04:14:21",
+      "puntos": 3.0,
+      "t_entrada": 1790579041.057885,
+      "t_salida": 1790579661.224332
+    },
+    {
+      "entrada": 7771.5,
+      "salida": 7768.5,
+      "posicion": "LONG",
+      "resultado": -155.24,
+      "bruto": -150.0,
+      "comision": 5.24,
+      "motivo": "STOP LOSS",
+      "hora": "04:53:02",
+      "puntos": -3.0,
+      "t_entrada": 1790581800.598163,
+      "t_salida": 1790581982.833129
+    },
+    {
+      "entrada": 7771.0,
+      "salida": 7774.0,
+      "posicion": "SHORT",
+      "resultado": -155.24,
+      "bruto": -150.0,
+      "comision": 5.24,
+      "motivo": "STOP LOSS",
+      "hora": "05:14:13",
+      "puntos": -3.0,
+      "t_entrada": 1790582701.373976,
+      "t_salida": 1790583253.0956218
+    }
+  ],
+  "log": [
+    {
+      "hora": "05:14:13",
+      "tipo": "COMPRA",
+      "precio": 7774.0,
+      "mensaje": "STOP LOSS · SHORT cerrado · P&L: $-155.24"
+    },
+    {
+      "hora": "05:05:01",
+      "tipo": "VENTA",
+      "precio": 7771.0,
+      "mensaje": "Cruce bajista confirmado EMA7/10 · TP:$7768.0 · SL:$7774.0"
+    },
+    {
+      "hora": "05:04:00",
+      "tipo": "WARN",
+      "precio": 7768.75,
+      "mensaje": "Cruce VENDER — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "04:53:02",
+      "tipo": "VENTA",
+      "precio": 7768.5,
+      "mensaje": "STOP LOSS · LONG cerrado · P&L: $-155.24"
+    },
+    {
+      "hora": "04:50:00",
+      "tipo": "COMPRA",
+      "precio": 7771.5,
+      "mensaje": "Cruce alcista confirmado EMA7/10 · TP:$7774.5 · SL:$7768.5"
+    },
+    {
+      "hora": "04:49:00",
+      "tipo": "WARN",
+      "precio": 7770.25,
+      "mensaje": "Cruce COMPRAR — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "04:43:00",
+      "tipo": "INFO",
+      "precio": 7767.75,
+      "mensaje": "Cruce COMPRAR no confirmado — descartado"
+    },
+    {
+      "hora": "04:42:00",
+      "tipo": "WARN",
+      "precio": 7770.25,
+      "mensaje": "Cruce COMPRAR — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "04:38:00",
+      "tipo": "INFO",
+      "precio": 7768.25,
+      "mensaje": "Cruce COMPRAR no confirmado — descartado"
+    },
+    {
+      "hora": "04:37:01",
+      "tipo": "WARN",
+      "precio": 7769.75,
+      "mensaje": "Cruce COMPRAR — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "04:27:00",
+      "tipo": "INFO",
+      "precio": 7768.75,
+      "mensaje": "Cruce COMPRAR no confirmado — descartado"
+    },
+    {
+      "hora": "04:26:01",
+      "tipo": "WARN",
+      "precio": 7771.25,
+      "mensaje": "Cruce COMPRAR — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "04:14:21",
+      "tipo": "COMPRA",
+      "precio": 7769.0,
+      "mensaje": "TAKE PROFIT · SHORT cerrado · P&L: $+144.76"
+    },
+    {
+      "hora": "04:04:01",
+      "tipo": "VENTA",
+      "precio": 7772.0,
+      "mensaje": "Cruce bajista confirmado EMA7/10 · TP:$7769.0 · SL:$7775.0"
+    },
+    {
+      "hora": "04:03:00",
+      "tipo": "WARN",
+      "precio": 7772.5,
+      "mensaje": "Cruce VENDER — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "03:59:54",
+      "tipo": "COMPRA",
+      "precio": 7776.75,
+      "mensaje": "STOP LOSS · SHORT cerrado · P&L: $-155.24"
+    },
+    {
+      "hora": "03:58:01",
+      "tipo": "VENTA",
+      "precio": 7773.75,
+      "mensaje": "Cruce bajista confirmado EMA7/10 · TP:$7770.75 · SL:$7776.75"
+    },
+    {
+      "hora": "03:57:01",
+      "tipo": "WARN",
+      "precio": 7772.75,
+      "mensaje": "Cruce VENDER — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "03:53:47",
+      "tipo": "VENTA",
+      "precio": 7776.5,
+      "mensaje": "TAKE PROFIT · LONG cerrado · P&L: $+144.76"
+    },
+    {
+      "hora": "03:39:00",
+      "tipo": "COMPRA",
+      "precio": 7773.5,
+      "mensaje": "Cruce alcista confirmado EMA7/10 · TP:$7776.5 · SL:$7770.5"
+    },
+    {
+      "hora": "03:38:00",
+      "tipo": "WARN",
+      "precio": 7773.0,
+      "mensaje": "Cruce COMPRAR — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "03:20:40",
+      "tipo": "COMPRA",
+      "precio": 7773.0,
+      "mensaje": "TAKE PROFIT · SHORT cerrado · P&L: $+144.76"
+    },
+    {
+      "hora": "03:19:00",
+      "tipo": "VENTA",
+      "precio": 7776.0,
+      "mensaje": "Cruce bajista confirmado EMA7/10 · TP:$7773.0 · SL:$7779.0"
+    },
+    {
+      "hora": "03:18:01",
+      "tipo": "WARN",
+      "precio": 7775.75,
+      "mensaje": "Cruce VENDER — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "03:00:04",
+      "tipo": "VENTA",
+      "precio": 7777.0,
+      "mensaje": "TAKE PROFIT · LONG cerrado · P&L: $+144.76"
+    },
+    {
+      "hora": "02:51:00",
+      "tipo": "COMPRA",
+      "precio": 7774.0,
+      "mensaje": "Cruce alcista confirmado EMA7/10 · TP:$7777.0 · SL:$7771.0"
+    },
+    {
+      "hora": "02:50:00",
+      "tipo": "WARN",
+      "precio": 7773.5,
+      "mensaje": "Cruce COMPRAR — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "02:33:25",
+      "tipo": "COMPRA",
+      "precio": 7775.75,
+      "mensaje": "STOP LOSS · SHORT cerrado · P&L: $-155.24"
+    },
+    {
+      "hora": "02:32:01",
+      "tipo": "VENTA",
+      "precio": 7772.75,
+      "mensaje": "Cruce bajista confirmado EMA7/10 · TP:$7769.75 · SL:$7775.75"
+    },
+    {
+      "hora": "02:31:01",
+      "tipo": "WARN",
+      "precio": 7773.5,
+      "mensaje": "Cruce VENDER — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "02:30:18",
+      "tipo": "VENTA",
+      "precio": 7772.75,
+      "mensaje": "STOP LOSS · LONG cerrado · P&L: $-155.24"
+    },
+    {
+      "hora": "02:29:01",
+      "tipo": "COMPRA",
+      "precio": 7775.75,
+      "mensaje": "Cruce alcista confirmado EMA7/10 · TP:$7778.75 · SL:$7772.75"
+    },
+    {
+      "hora": "02:28:01",
+      "tipo": "WARN",
+      "precio": 7775.75,
+      "mensaje": "Cruce COMPRAR — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "02:21:01",
+      "tipo": "COMPRA",
+      "precio": 7773.25,
+      "mensaje": "TAKE PROFIT · SHORT cerrado · P&L: $+144.76"
+    },
+    {
+      "hora": "01:32:00",
+      "tipo": "VENTA",
+      "precio": 7776.25,
+      "mensaje": "Cruce bajista confirmado EMA7/10 · TP:$7773.25 · SL:$7779.25"
+    },
+    {
+      "hora": "01:31:00",
+      "tipo": "WARN",
+      "precio": 7775.75,
+      "mensaje": "Cruce VENDER — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "01:30:00",
+      "tipo": "INFO",
+      "precio": 7776.75,
+      "mensaje": "Cruce VENDER no confirmado — descartado"
+    },
+    {
+      "hora": "01:29:00",
+      "tipo": "WARN",
+      "precio": 7776.5,
+      "mensaje": "Cruce VENDER — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "01:20:56",
+      "tipo": "VENTA",
+      "precio": 7778.75,
+      "mensaje": "TAKE PROFIT · LONG cerrado · P&L: $+144.76"
+    },
+    {
+      "hora": "01:11:01",
+      "tipo": "COMPRA",
+      "precio": 7775.75,
+      "mensaje": "Cruce alcista confirmado EMA7/10 · TP:$7778.75 · SL:$7772.75"
+    },
+    {
+      "hora": "01:10:01",
+      "tipo": "WARN",
+      "precio": 7775.0,
+      "mensaje": "Cruce COMPRAR — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "00:59:12",
+      "tipo": "VENTA",
+      "precio": 7772.25,
+      "mensaje": "STOP LOSS · LONG cerrado · P&L: $-155.24"
+    },
+    {
+      "hora": "00:45:01",
+      "tipo": "COMPRA",
+      "precio": 7775.25,
+      "mensaje": "Cruce alcista confirmado EMA7/10 · TP:$7778.25 · SL:$7772.25"
+    },
+    {
+      "hora": "00:44:00",
+      "tipo": "WARN",
+      "precio": 7775.0,
+      "mensaje": "Cruce COMPRAR — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "00:35:00",
+      "tipo": "COMPRA",
+      "precio": 7773.0,
+      "mensaje": "TAKE PROFIT · SHORT cerrado · P&L: $+144.76"
+    },
+    {
+      "hora": "00:17:01",
+      "tipo": "VENTA",
+      "precio": 7776.0,
+      "mensaje": "Cruce bajista confirmado EMA7/10 · TP:$7773.0 · SL:$7779.0"
+    },
+    {
+      "hora": "00:16:01",
+      "tipo": "WARN",
+      "precio": 7776.0,
+      "mensaje": "Cruce VENDER — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "00:02:59",
+      "tipo": "WARN",
+      "precio": 7776.75,
+      "mensaje": "Corte de 5 min 21 s sin precio — historial recargado (40 velas)"
+    },
+    {
+      "hora": "00:02:40",
+      "tipo": "INFO",
+      "precio": null,
+      "mensaje": "Error resuelto · duró 32 s"
+    },
+    {
+      "hora": "00:02:08",
+      "tipo": "WARN",
+      "precio": null,
+      "mensaje": "Error: Error obteniendo precio de Schwab: The read operation timed out"
+    }
+  ]
+}

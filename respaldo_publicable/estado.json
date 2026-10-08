@@ -1,0 +1,988 @@
+{
+  "timestamp": "21:39:45",
+  "ts": 1791419985.503285,
+  "estado_bot": "OPERANDO",
+  "simbolo": "/ES",
+  "contrato": "/ESZ26",
+  "vela_seg": 60,
+  "valor_punto": 50.0,
+  "hora_apertura": "19:00",
+  "hora_cierre": "17:30",
+  "reabre": "jue 19:00",
+  "sesion": "2026-10-08",
+  "senal_pendiente": null,
+  "t_entrada": null,
+  "pnl_abierto": null,
+  "comision_operacion": 5.24,
+  "velas": [
+    {
+      "t": 1791416400,
+      "o": 7857.25,
+      "h": 7857.5,
+      "l": 7857.25,
+      "c": 7857.5
+    },
+    {
+      "t": 1791416460,
+      "o": 7857.5,
+      "h": 7857.5,
+      "l": 7857.25,
+      "c": 7857.25
+    },
+    {
+      "t": 1791416520,
+      "o": 7857.25,
+      "h": 7857.5,
+      "l": 7857.25,
+      "c": 7857.5
+    },
+    {
+      "t": 1791416580,
+      "o": 7857.5,
+      "h": 7857.5,
+      "l": 7857.0,
+      "c": 7857.0
+    },
+    {
+      "t": 1791416640,
+      "o": 7857.0,
+      "h": 7857.0,
+      "l": 7857.0,
+      "c": 7857.0
+    },
+    {
+      "t": 1791416700,
+      "o": 7857.0,
+      "h": 7857.25,
+      "l": 7854.5,
+      "c": 7854.5
+    },
+    {
+      "t": 1791416760,
+      "o": 7854.5,
+      "h": 7854.5,
+      "l": 7853.25,
+      "c": 7854.25
+    },
+    {
+      "t": 1791416820,
+      "o": 7854.25,
+      "h": 7854.75,
+      "l": 7853.0,
+      "c": 7853.0
+    },
+    {
+      "t": 1791416880,
+      "o": 7853.25,
+      "h": 7853.5,
+      "l": 7852.75,
+      "c": 7853.25
+    },
+    {
+      "t": 1791416940,
+      "o": 7853.25,
+      "h": 7853.25,
+      "l": 7852.5,
+      "c": 7852.75
+    },
+    {
+      "t": 1791417000,
+      "o": 7852.75,
+      "h": 7853.0,
+      "l": 7852.5,
+      "c": 7853.0
+    },
+    {
+      "t": 1791417060,
+      "o": 7852.75,
+      "h": 7853.0,
+      "l": 7852.5,
+      "c": 7852.75
+    },
+    {
+      "t": 1791417120,
+      "o": 7852.75,
+      "h": 7853.25,
+      "l": 7852.75,
+      "c": 7853.0
+    },
+    {
+      "t": 1791417180,
+      "o": 7853.0,
+      "h": 7853.0,
+      "l": 7852.25,
+      "c": 7852.25
+    },
+    {
+      "t": 1791417240,
+      "o": 7852.5,
+      "h": 7852.75,
+      "l": 7851.75,
+      "c": 7852.25
+    },
+    {
+      "t": 1791417300,
+      "o": 7852.25,
+      "h": 7853.25,
+      "l": 7852.0,
+      "c": 7852.75
+    },
+    {
+      "t": 1791417360,
+      "o": 7852.75,
+      "h": 7853.75,
+      "l": 7852.75,
+      "c": 7853.25
+    },
+    {
+      "t": 1791417420,
+      "o": 7853.25,
+      "h": 7853.25,
+      "l": 7853.0,
+      "c": 7853.0
+    },
+    {
+      "t": 1791417480,
+      "o": 7853.25,
+      "h": 7853.5,
+      "l": 7853.25,
+      "c": 7853.5
+    },
+    {
+      "t": 1791417540,
+      "o": 7853.5,
+      "h": 7853.75,
+      "l": 7852.75,
+      "c": 7852.75
+    },
+    {
+      "t": 1791417600,
+      "o": 7852.5,
+      "h": 7853.25,
+      "l": 7852.25,
+      "c": 7852.25
+    },
+    {
+      "t": 1791417660,
+      "o": 7852.5,
+      "h": 7852.5,
+      "l": 7851.5,
+      "c": 7852.0
+    },
+    {
+      "t": 1791417720,
+      "o": 7851.75,
+      "h": 7852.25,
+      "l": 7851.5,
+      "c": 7852.25
+    },
+    {
+      "t": 1791417780,
+      "o": 7852.25,
+      "h": 7852.5,
+      "l": 7851.5,
+      "c": 7852.0
+    },
+    {
+      "t": 1791417840,
+      "o": 7852.0,
+      "h": 7852.25,
+      "l": 7851.75,
+      "c": 7852.25
+    },
+    {
+      "t": 1791417900,
+      "o": 7852.25,
+      "h": 7852.5,
+      "l": 7851.75,
+      "c": 7852.0
+    },
+    {
+      "t": 1791417960,
+      "o": 7852.0,
+      "h": 7852.5,
+      "l": 7850.75,
+      "c": 7851.25
+    },
+    {
+      "t": 1791418020,
+      "o": 7851.25,
+      "h": 7852.25,
+      "l": 7851.25,
+      "c": 7852.0
+    },
+    {
+      "t": 1791418080,
+      "o": 7852.0,
+      "h": 7852.25,
+      "l": 7851.25,
+      "c": 7851.5
+    },
+    {
+      "t": 1791418140,
+      "o": 7851.25,
+      "h": 7851.25,
+      "l": 7850.0,
+      "c": 7850.25
+    },
+    {
+      "t": 1791418200,
+      "o": 7850.25,
+      "h": 7850.5,
+      "l": 7849.5,
+      "c": 7850.5
+    },
+    {
+      "t": 1791418260,
+      "o": 7850.75,
+      "h": 7851.25,
+      "l": 7849.75,
+      "c": 7850.0
+    },
+    {
+      "t": 1791418320,
+      "o": 7850.0,
+      "h": 7851.5,
+      "l": 7850.0,
+      "c": 7851.5
+    },
+    {
+      "t": 1791418380,
+      "o": 7851.5,
+      "h": 7851.75,
+      "l": 7850.75,
+      "c": 7850.75
+    },
+    {
+      "t": 1791418440,
+      "o": 7850.75,
+      "h": 7851.5,
+      "l": 7850.5,
+      "c": 7850.5
+    },
+    {
+      "t": 1791418500,
+      "o": 7850.5,
+      "h": 7850.75,
+      "l": 7849.25,
+      "c": 7850.0
+    },
+    {
+      "t": 1791418560,
+      "o": 7850.75,
+      "h": 7850.75,
+      "l": 7850.0,
+      "c": 7850.75
+    },
+    {
+      "t": 1791418620,
+      "o": 7851.0,
+      "h": 7851.25,
+      "l": 7850.5,
+      "c": 7851.25
+    },
+    {
+      "t": 1791418680,
+      "o": 7851.0,
+      "h": 7852.0,
+      "l": 7850.75,
+      "c": 7851.0
+    },
+    {
+      "t": 1791418740,
+      "o": 7851.0,
+      "h": 7851.25,
+      "l": 7850.5,
+      "c": 7850.75
+    },
+    {
+      "t": 1791418800,
+      "o": 7850.75,
+      "h": 7851.0,
+      "l": 7850.25,
+      "c": 7850.5
+    },
+    {
+      "t": 1791418860,
+      "o": 7850.5,
+      "h": 7850.5,
+      "l": 7849.75,
+      "c": 7850.0
+    },
+    {
+      "t": 1791418920,
+      "o": 7849.75,
+      "h": 7850.5,
+      "l": 7849.75,
+      "c": 7850.25
+    },
+    {
+      "t": 1791418980,
+      "o": 7850.5,
+      "h": 7850.5,
+      "l": 7850.0,
+      "c": 7850.0
+    },
+    {
+      "t": 1791419040,
+      "o": 7850.0,
+      "h": 7850.5,
+      "l": 7850.0,
+      "c": 7850.25
+    },
+    {
+      "t": 1791419100,
+      "o": 7850.25,
+      "h": 7850.5,
+      "l": 7849.25,
+      "c": 7849.25
+    },
+    {
+      "t": 1791419160,
+      "o": 7849.25,
+      "h": 7849.75,
+      "l": 7849.0,
+      "c": 7849.25
+    },
+    {
+      "t": 1791419220,
+      "o": 7849.25,
+      "h": 7849.25,
+      "l": 7848.25,
+      "c": 7848.5
+    },
+    {
+      "t": 1791419280,
+      "o": 7848.5,
+      "h": 7849.0,
+      "l": 7848.5,
+      "c": 7849.0
+    },
+    {
+      "t": 1791419340,
+      "o": 7849.0,
+      "h": 7849.0,
+      "l": 7847.25,
+      "c": 7847.5
+    },
+    {
+      "t": 1791419400,
+      "o": 7847.5,
+      "h": 7847.75,
+      "l": 7846.75,
+      "c": 7847.25
+    },
+    {
+      "t": 1791419460,
+      "o": 7847.25,
+      "h": 7847.75,
+      "l": 7847.25,
+      "c": 7847.25
+    },
+    {
+      "t": 1791419520,
+      "o": 7847.25,
+      "h": 7847.25,
+      "l": 7846.75,
+      "c": 7847.0
+    },
+    {
+      "t": 1791419580,
+      "o": 7847.0,
+      "h": 7847.0,
+      "l": 7846.25,
+      "c": 7846.75
+    },
+    {
+      "t": 1791419640,
+      "o": 7846.75,
+      "h": 7848.0,
+      "l": 7846.75,
+      "c": 7848.0
+    },
+    {
+      "t": 1791419700,
+      "o": 7848.0,
+      "h": 7848.75,
+      "l": 7847.75,
+      "c": 7848.25
+    },
+    {
+      "t": 1791419760,
+      "o": 7848.0,
+      "h": 7848.5,
+      "l": 7848.0,
+      "c": 7848.0
+    },
+    {
+      "t": 1791419820,
+      "o": 7848.0,
+      "h": 7848.0,
+      "l": 7847.5,
+      "c": 7847.75
+    },
+    {
+      "t": 1791419880,
+      "o": 7847.75,
+      "h": 7847.75,
+      "l": 7847.5,
+      "c": 7847.75
+    },
+    {
+      "t": 1791419940,
+      "o": 7847.75,
+      "h": 7847.75,
+      "l": 7847.0,
+      "c": 7847.25
+    }
+  ],
+  "ema7_serie": [
+    7857.5,
+    7857.4375,
+    7857.4531,
+    7857.3398,
+    7857.2549,
+    7856.5662,
+    7855.9871,
+    7855.2403,
+    7854.7428,
+    7854.2446,
+    7853.9334,
+    7853.6376,
+    7853.4782,
+    7853.1711,
+    7852.9408,
+    7852.8931,
+    7852.9824,
+    7852.9868,
+    7853.1151,
+    7853.0238,
+    7852.8304,
+    7852.6228,
+    7852.5296,
+    7852.3972,
+    7852.3604,
+    7852.2703,
+    7852.0152,
+    7852.0114,
+    7851.8836,
+    7851.4752,
+    7851.2314,
+    7850.9235,
+    7851.0676,
+    7850.9882,
+    7850.8662,
+    7850.6496,
+    7850.6747,
+    7850.8185,
+    7850.8639,
+    7850.8354,
+    7850.7516,
+    7850.5637,
+    7850.4853,
+    7850.3639,
+    7850.3355,
+    7850.0641,
+    7849.8606,
+    7849.5204,
+    7849.3903,
+    7848.9177,
+    7848.5008,
+    7848.1881,
+    7847.8911,
+    7847.6058,
+    7847.7044,
+    7847.8408,
+    7847.8806,
+    7847.8479,
+    7847.8234,
+    7847.6801
+  ],
+  "ema10_serie": [
+    7857.5,
+    7857.4545,
+    7857.4628,
+    7857.3787,
+    7857.3098,
+    7856.7989,
+    7856.3355,
+    7855.729,
+    7855.2783,
+    7854.8186,
+    7854.488,
+    7854.172,
+    7853.9589,
+    7853.6482,
+    7853.394,
+    7853.2769,
+    7853.272,
+    7853.2225,
+    7853.273,
+    7853.1779,
+    7853.0092,
+    7852.8257,
+    7852.721,
+    7852.5899,
+    7852.5281,
+    7852.4321,
+    7852.2172,
+    7852.1777,
+    7852.0545,
+    7851.7264,
+    7851.5034,
+    7851.2301,
+    7851.2791,
+    7851.1829,
+    7851.0588,
+    7850.8663,
+    7850.8451,
+    7850.9187,
+    7850.9335,
+    7850.9001,
+    7850.8274,
+    7850.677,
+    7850.5993,
+    7850.4904,
+    7850.4467,
+    7850.2291,
+    7850.0511,
+    7849.7691,
+    7849.6292,
+    7849.2421,
+    7848.8799,
+    7848.5836,
+    7848.2956,
+    7848.0146,
+    7848.012,
+    7848.0552,
+    7848.0452,
+    7847.9915,
+    7847.9476,
+    7847.8208
+  ],
+  "ema_rapida": 7,
+  "ema_lenta": 10,
+  "operaciones": [
+    {
+      "entrada": 7852.0,
+      "salida": 7854.0,
+      "posicion": "SHORT",
+      "resultado": -105.24,
+      "bruto": -100.0,
+      "comision": 5.24,
+      "motivo": "STOP LOSS",
+      "hora": "19:05:06",
+      "puntos": -2.0,
+      "t_entrada": 1791410521.188406,
+      "t_salida": 1791410706.250475
+    },
+    {
+      "entrada": 7853.0,
+      "salida": 7855.5,
+      "posicion": "LONG",
+      "resultado": 119.76,
+      "bruto": 125.0,
+      "comision": 5.24,
+      "motivo": "TAKE PROFIT",
+      "hora": "20:04:25",
+      "puntos": 2.5,
+      "t_entrada": 1791411541.336684,
+      "t_salida": 1791414265.900218
+    },
+    {
+      "entrada": 7856.75,
+      "salida": 7854.75,
+      "posicion": "LONG",
+      "resultado": -105.24,
+      "bruto": -100.0,
+      "comision": 5.24,
+      "motivo": "STOP LOSS",
+      "hora": "20:45:39",
+      "puntos": -2.0,
+      "t_entrada": 1791415861.325588,
+      "t_salida": 1791416739.1250901
+    },
+    {
+      "entrada": 7854.25,
+      "salida": 7852.25,
+      "posicion": "LONG",
+      "resultado": -105.24,
+      "bruto": -100.0,
+      "comision": 5.24,
+      "motivo": "STOP LOSS",
+      "hora": "20:53:41",
+      "puntos": -2.0,
+      "t_entrada": 1791416821.0485702,
+      "t_salida": 1791417221.835372
+    }
+  ],
+  "modo": "PAPER",
+  "precio_actual": 7847.25,
+  "ema7": 7847.6801,
+  "ema10": 7847.8208,
+  "adx": 41.16,
+  "señal": "MANTENER",
+  "posicion_abierta": null,
+  "precio_entrada": null,
+  "stop_loss_precio": null,
+  "take_profit_precio": null,
+  "operaciones_hoy": 4,
+  "max_operaciones": 0,
+  "perdida_acumulada": 315.72,
+  "max_perdida": 0.0,
+  "pnl_paper": -195.96,
+  "buys_hoy": 3,
+  "sells_hoy": 1,
+  "telegram_ok": true,
+  "velas_procesadas": 650,
+  "historial_precios": [
+    7852.25,
+    7852.0,
+    7852.25,
+    7852.0,
+    7852.25,
+    7852.0,
+    7851.25,
+    7852.0,
+    7851.5,
+    7850.25,
+    7850.5,
+    7850.0,
+    7851.5,
+    7850.75,
+    7850.5,
+    7850.0,
+    7850.75,
+    7851.25,
+    7851.0,
+    7850.75,
+    7850.5,
+    7850.0,
+    7850.25,
+    7850.0,
+    7850.25,
+    7849.25,
+    7849.25,
+    7848.5,
+    7849.0,
+    7847.5,
+    7847.25,
+    7847.25,
+    7847.0,
+    7846.75,
+    7848.0,
+    7848.25,
+    7848.0,
+    7847.75,
+    7847.75,
+    7847.25
+  ],
+  "log": [
+    {
+      "hora": "20:53:41",
+      "tipo": "VENTA",
+      "precio": 7852.25,
+      "mensaje": "STOP LOSS · LONG cerrado · P&L: $-105.24"
+    },
+    {
+      "hora": "20:47:01",
+      "tipo": "COMPRA",
+      "precio": 7854.25,
+      "mensaje": "Cruce bajista confirmado EMA 7/10 · INVERTIDA · TP:$7856.75 · SL:$7852.25"
+    },
+    {
+      "hora": "20:46:00",
+      "tipo": "WARN",
+      "precio": 7854.5,
+      "mensaje": "Cruce VENDER — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "20:45:39",
+      "tipo": "VENTA",
+      "precio": 7854.75,
+      "mensaje": "STOP LOSS · LONG cerrado · P&L: $-105.24"
+    },
+    {
+      "hora": "20:31:01",
+      "tipo": "COMPRA",
+      "precio": 7856.75,
+      "mensaje": "Cruce bajista confirmado EMA 7/10 · INVERTIDA · TP:$7859.25 · SL:$7854.75"
+    },
+    {
+      "hora": "20:30:01",
+      "tipo": "WARN",
+      "precio": 7856.25,
+      "mensaje": "Cruce VENDER — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "20:04:25",
+      "tipo": "VENTA",
+      "precio": 7855.5,
+      "mensaje": "TAKE PROFIT · LONG cerrado · P&L: $+119.76"
+    },
+    {
+      "hora": "19:19:01",
+      "tipo": "COMPRA",
+      "precio": 7853.0,
+      "mensaje": "Cruce bajista confirmado EMA 7/10 · INVERTIDA · TP:$7855.5 · SL:$7851.0"
+    },
+    {
+      "hora": "19:18:00",
+      "tipo": "WARN",
+      "precio": 7853.0,
+      "mensaje": "Cruce VENDER — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "19:05:06",
+      "tipo": "COMPRA",
+      "precio": 7854.0,
+      "mensaje": "STOP LOSS · SHORT cerrado · P&L: $-105.24"
+    },
+    {
+      "hora": "19:02:01",
+      "tipo": "VENTA",
+      "precio": 7852.0,
+      "mensaje": "Cruce alcista confirmado EMA 7/10 · INVERTIDA · TP:$7849.5 · SL:$7854.0"
+    },
+    {
+      "hora": "19:01:01",
+      "tipo": "WARN",
+      "precio": 7852.5,
+      "mensaje": "Cruce COMPRAR — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "19:00:06",
+      "tipo": "INFO",
+      "precio": null,
+      "mensaje": "Nueva sesión 08/10 — contadores reseteados"
+    },
+    {
+      "hora": "17:30:02",
+      "tipo": "INFO",
+      "precio": 7851.0,
+      "mensaje": "Fuera de horario — reporte enviado · reabre 19:00"
+    },
+    {
+      "hora": "17:18:46",
+      "tipo": "VENTA",
+      "precio": 7850.75,
+      "mensaje": "STOP LOSS · LONG cerrado · P&L: $-117.74"
+    },
+    {
+      "hora": "17:06:00",
+      "tipo": "COMPRA",
+      "precio": 7853.0,
+      "mensaje": "Cruce bajista confirmado EMA 7/10 · INVERTIDA · TP:$7855.5 · SL:$7851.0"
+    },
+    {
+      "hora": "17:05:00",
+      "tipo": "WARN",
+      "precio": 7853.0,
+      "mensaje": "Cruce VENDER — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "16:55:00",
+      "tipo": "COMPRA",
+      "precio": 7855.25,
+      "mensaje": "STOP LOSS · SHORT cerrado · P&L: $-142.74"
+    },
+    {
+      "hora": "16:52:02",
+      "tipo": "VENTA",
+      "precio": 7852.5,
+      "mensaje": "Cruce alcista confirmado EMA 7/10 · INVERTIDA · TP:$7850.0 · SL:$7854.5"
+    },
+    {
+      "hora": "16:51:00",
+      "tipo": "WARN",
+      "precio": 7854.25,
+      "mensaje": "Cruce COMPRAR — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "16:50:52",
+      "tipo": "VENTA",
+      "precio": 7854.5,
+      "mensaje": "TAKE PROFIT · LONG cerrado · P&L: $+119.76"
+    },
+    {
+      "hora": "16:50:01",
+      "tipo": "COMPRA",
+      "precio": 7852.0,
+      "mensaje": "Cruce bajista confirmado EMA 7/10 · INVERTIDA · TP:$7854.5 · SL:$7850.0"
+    },
+    {
+      "hora": "16:49:00",
+      "tipo": "WARN",
+      "precio": 7849.25,
+      "mensaje": "Cruce VENDER — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "16:47:52",
+      "tipo": "COMPRA",
+      "precio": 7850.5,
+      "mensaje": "TAKE PROFIT · SHORT cerrado · P&L: $+119.76"
+    },
+    {
+      "hora": "16:45:01",
+      "tipo": "VENTA",
+      "precio": 7853.0,
+      "mensaje": "Cruce alcista confirmado EMA 7/10 · INVERTIDA · TP:$7850.5 · SL:$7855.0"
+    },
+    {
+      "hora": "16:44:01",
+      "tipo": "WARN",
+      "precio": 7853.0,
+      "mensaje": "Cruce COMPRAR — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "16:37:37",
+      "tipo": "COMPRA",
+      "precio": 7849.75,
+      "mensaje": "TAKE PROFIT · SHORT cerrado · P&L: $+119.76"
+    },
+    {
+      "hora": "16:31:26",
+      "tipo": "INFO",
+      "precio": null,
+      "mensaje": "Error resuelto · duró 32 s"
+    },
+    {
+      "hora": "16:30:54",
+      "tipo": "WARN",
+      "precio": null,
+      "mensaje": "Error: Error obteniendo precio de Schwab: Expecting value: line 3 column 9 (char 22)"
+    },
+    {
+      "hora": "16:27:01",
+      "tipo": "VENTA",
+      "precio": 7852.25,
+      "mensaje": "Cruce alcista confirmado EMA 7/10 · INVERTIDA · TP:$7849.75 · SL:$7854.25"
+    },
+    {
+      "hora": "16:26:00",
+      "tipo": "WARN",
+      "precio": 7853.25,
+      "mensaje": "Cruce COMPRAR — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "16:06:39",
+      "tipo": "VENTA",
+      "precio": 7850.5,
+      "mensaje": "STOP LOSS · LONG cerrado · P&L: $-167.74"
+    },
+    {
+      "hora": "16:06:01",
+      "tipo": "COMPRA",
+      "precio": 7853.75,
+      "mensaje": "Cruce bajista confirmado EMA 7/10 · INVERTIDA · TP:$7856.25 · SL:$7851.75"
+    },
+    {
+      "hora": "16:05:00",
+      "tipo": "WARN",
+      "precio": 7853.25,
+      "mensaje": "Cruce VENDER — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "15:56:32",
+      "tipo": "COMPRA",
+      "precio": 7857.0,
+      "mensaje": "STOP LOSS · SHORT cerrado · P&L: $-105.24"
+    },
+    {
+      "hora": "15:51:01",
+      "tipo": "VENTA",
+      "precio": 7855.0,
+      "mensaje": "Cruce alcista confirmado EMA 7/10 · INVERTIDA · TP:$7852.5 · SL:$7857.0"
+    },
+    {
+      "hora": "15:50:01",
+      "tipo": "WARN",
+      "precio": 7854.5,
+      "mensaje": "Cruce COMPRAR — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "15:44:16",
+      "tipo": "VENTA",
+      "precio": 7854.0,
+      "mensaje": "TAKE PROFIT · LONG cerrado · P&L: $+119.76"
+    },
+    {
+      "hora": "15:44:00",
+      "tipo": "INFO",
+      "precio": null,
+      "mensaje": "Error resuelto · duró 47 s"
+    },
+    {
+      "hora": "15:43:12",
+      "tipo": "WARN",
+      "precio": null,
+      "mensaje": "Error: Error obteniendo precio de Schwab: The read operation timed out"
+    },
+    {
+      "hora": "15:39:00",
+      "tipo": "COMPRA",
+      "precio": 7851.5,
+      "mensaje": "Cruce bajista confirmado EMA 7/10 · INVERTIDA · TP:$7854.0 · SL:$7849.5"
+    },
+    {
+      "hora": "15:38:00",
+      "tipo": "WARN",
+      "precio": 7854.5,
+      "mensaje": "Cruce VENDER — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "15:28:06",
+      "tipo": "VENTA",
+      "precio": 7856.5,
+      "mensaje": "TAKE PROFIT · LONG cerrado · P&L: $+119.76"
+    },
+    {
+      "hora": "15:16:01",
+      "tipo": "COMPRA",
+      "precio": 7854.0,
+      "mensaje": "Cruce bajista confirmado EMA 7/10 · INVERTIDA · TP:$7856.5 · SL:$7852.0"
+    },
+    {
+      "hora": "15:15:00",
+      "tipo": "WARN",
+      "precio": 7853.75,
+      "mensaje": "Cruce VENDER — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "15:09:14",
+      "tipo": "COMPRA",
+      "precio": 7854.5,
+      "mensaje": "TAKE PROFIT · SHORT cerrado · P&L: $+119.76"
+    },
+    {
+      "hora": "15:07:00",
+      "tipo": "VENTA",
+      "precio": 7857.0,
+      "mensaje": "Cruce alcista confirmado EMA 7/10 · INVERTIDA · TP:$7854.5 · SL:$7859.0"
+    },
+    {
+      "hora": "15:06:00",
+      "tipo": "WARN",
+      "precio": 7857.25,
+      "mensaje": "Cruce COMPRAR — esperando confirmación (vela siguiente)"
+    },
+    {
+      "hora": "14:56:24",
+      "tipo": "VENTA",
+      "precio": 7851.25,
+      "mensaje": "STOP LOSS · LONG cerrado · P&L: $-105.24"
+    },
+    {
+      "hora": "14:53:01",
+      "tipo": "COMPRA",
+      "precio": 7853.25,
+      "mensaje": "Cruce bajista confirmado EMA 7/10 · INVERTIDA · TP:$7855.75 · SL:$7851.25"
+    }
+  ],
+  "take_profit_puntos": 2.5,
+  "stop_loss_puntos": 2.0,
+  "token_vence": "[OCULTO]",
+  "token_vence_ts": "[OCULTO]",
+  "aviso_token": "[OCULTO]",
+  "token_vencido": "[OCULTO]"
+}
