@@ -1,0 +1,71 @@
+{
+  "timestamp": "21:31:21",
+  "modo": "PAPER",
+  "simbolo": "/ES",
+  "contrato": "/ESZ26",
+  "sesion": "2026-10-08",
+  "precio_actual": 7847.75,
+  "posicion_abierta": null,
+  "precio_entrada": null,
+  "pnl_abierto": null,
+  "comision_operacion": 5.24,
+  "operaciones_hoy": 4,
+  "perdida_acumulada": 315.72,
+  "pnl_paper": -195.96,
+  "buys_hoy": 3,
+  "sells_hoy": 1,
+  "operaciones": [
+    {
+      "entrada": 7852.0,
+      "salida": 7854.0,
+      "posicion": "SHORT",
+      "resultado": -105.24,
+      "bruto": -100.0,
+      "comision": 5.24,
+      "motivo": "STOP LOSS",
+      "hora": "19:05:06",
+      "puntos": -2.0,
+      "t_entrada": 1791410521.188406,
+      "t_salida": 1791410706.250475
+    },
+    {
+      "entrada": 7853.0,
+      "salida": 7855.5,
+      "posicion": "LONG",
+      "resultado": 119.76,
+      "bruto": 125.0,
+      "comision": 5.24,
+      "motivo": "TAKE PROFIT",
+      "hora": "20:04:25",
+      "puntos": 2.5,
+      "t_entrada": 1791411541.336684,
+      "t_salida": 1791414265.900218
+    },
+    {
+      "entrada": 7856.75,
+      "salida": 7854.75,
+      "posicion": "LONG",
+      "resultado": -105.24,
+      "bruto": -100.0,
+      "comision": 5.24,
+      "motivo": "STOP LOSS",
+      "hora": "20:45:39",
+      "puntos": -2.0,
+      "t_entrada": 1791415861.325588,
+      "t_salida": 1791416739.1250901
+    },
+    {
+      "entrada": 7854.25,
+      "salida": 7852.25,
+      "posicion": "LONG",
+      "resultado": -105.24,
+      "bruto": -100.0,
+      "comision": 5.24,
+      "motivo": "STOP LOSS",
+      "hora": "20:53:41",
+      "puntos": -2.0,
+      "t_entrada": 1791416821.0485702,
+      "t_salida": 1791417221.835372
+    }
+  ]
+}
